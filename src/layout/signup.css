@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.box1,
+.box2,
+.box3 {
+  width: 30%;
+  height: 400px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box1 {
+  width: 20%;
+}
+.box2 {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(238, 238, 238);
+  border: 1px solid grey;
+  border-radius: 20px;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
+  gap: 40px;
+}
+.box3 {
+  width: 20%;
+}
+.signinForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 80%;
+}
+#signup {
+  gap: 20px;
+}
+.input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.submit {
+  width: 100%;
+  height: 40px;
+  background-color: #007bff;
+  color: white;
+  border: 0;
+  margin-top: 10px;
+  border-radius: 15px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+.submit:active {
+  transform: translateY(0);
+}
