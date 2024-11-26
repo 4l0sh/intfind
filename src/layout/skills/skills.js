@@ -8,6 +8,21 @@ const Skills = () => {
     navigate('/');
   };
 
+  function clicked() {
+    let skill = document.getElementById('inp1').value;
+    let range = document.getElementById('inp2').value;
+    document
+      .getElementById('softskillsForm')
+      .addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log(skill, range);
+      });
+  }
+
+  function redirectToOpleiding() {
+    navigate('/opleiding');
+  }
+
   return (
     <div>
       <div className='container'>
@@ -26,18 +41,32 @@ const Skills = () => {
             <div className='softSkills'>
               <h2>Soft Skills</h2>
               <form className='softskillsForm' id='softskillsForm'>
+                <input
+                  id='inp1'
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  id='inp2'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
                 <input className='inp1' placeholder='Type Here your skill' />
                 <input className='inp2 range' type='range' min='1' max='5' />
                 <input className='inp1' placeholder='Type Here your skill' />
                 <input className='inp2 range' type='range' min='1' max='5' />
-                <span id='slider-value'>3</span>
                 <input className='inp1' placeholder='Type Here your skill' />
                 <input className='inp2 range' type='range' min='1' max='5' />
                 <input className='inp1' placeholder='Type Here your skill' />
                 <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='submit send' type='submit' value='Submit' />
+                <input
+                  onClick={clicked}
+                  className='submit send'
+                  type='submit'
+                  value='Submit'
+                />
               </form>
             </div>
             <div className='techSkills'>
@@ -59,7 +88,10 @@ const Skills = () => {
           </div>
         </div>
         <div className='box3'>
-          <i className='fa-solid fa-arrow-right arrow-right'></i>
+          <i
+            onClick={redirectToOpleiding}
+            className='fa-solid fa-arrow-right arrow-right'
+          ></i>
           <p>Next</p>
         </div>
       </div>

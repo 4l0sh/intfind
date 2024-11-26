@@ -49,6 +49,36 @@ app.post('/users/signup', (req, res) => {
   });
 });
 
+app.post('/users/skills', (req, res) => {
+  const { userId, softSkills, techSkills } = req.body;
+
+  if (!userId || !softSkills || !techSkills) {
+    return res.status(400).json({ message: 'Missing data' });
+  }
+
+  const collection = db.collection('users');
+
+  collection
+    .updateOne(
+      { _id: new MongoClient.ObjectId(userId) },
+      {
+        $set: {
+          softSkills,
+          techSkills,
+        },
+      }
+    )
+    .then((result) => {
+      if (result.matchedCount === 0) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.status(200).json({ message: 'Skills updated successfully' });
+    })
+    .catch((err) => {
+      console.log('Error updating skills:', err);
+      res.status(500).json({ message: 'Error updating skills' });
+    });
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
