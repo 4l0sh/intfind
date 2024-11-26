@@ -1,9 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import M from 'materialize-css';
+import { useNavigate } from 'react-router-dom';
 import './signup.css';
 
 const Signup = () => {
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+
+  const redirectToSkills = () => {
+    navigate('/skills');
+  };
 
   const signUserUp = (event) => {
     event.preventDefault();
@@ -37,6 +43,7 @@ const Signup = () => {
       })
       .catch((err) => console.log('error adding user', err));
   };
+
   return (
     <Fragment>
       <div className='container'>
@@ -73,7 +80,10 @@ const Signup = () => {
           </div>
         </div>
         <div className='box3'>
-          <i className='fa-solid fa-arrow-right arrow-right'></i>
+          <i
+            onClick={redirectToSkills}
+            className='fa-solid fa-arrow-right arrow-right'
+          ></i>
           <p>Next</p>
         </div>
       </div>
