@@ -39,6 +39,7 @@ const Signup = () => {
           M.toast({ html: 'User already exists', classes: 'red' });
         } else {
           console.log('user added', result);
+          localStorage.setItem('userId', result.userId);
         }
       })
       .catch((err) => console.log('error adding user', err));

@@ -1,20 +1,19 @@
 .skillsDiv {
   border-radius: 20px;
   width: 100%;
-  background-color: red;
-  border: 2px solid black;
-  height: 100%;
+  height: 60%;
   display: flex;
   flex-direction: row;
 }
 .softSkills {
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 50%;
-  background-color: blue;
+
   border-radius: 20px;
-  color: white;
+
   margin: 2px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -22,12 +21,72 @@
 .techSkills {
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 50%;
-  background-color: green;
   border-radius: 20px;
-  color: white;
   margin: 2px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+.softskillsForm,
+.techskillsForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.inp1,
+.inp2 {
+  width: 40%;
+  margin: 3px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+}
+.inp1 {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.inp1:focus {
+  border-color: #ff6600; /* Orange border on focus */
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.5); /* Orange shadow on focus */
+  outline: none;
+}
+
+.inp2 {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: #000dff3a; /* Light orange background */
+  border-radius: 4px;
+}
+
+.inp2::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ff6600; /* Orange thumb */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.inp2::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #ff6600; /* Orange thumb */
+  border-radius: 50%;
+  cursor: pointer;
+}
+.range {
+  margin-top: 15px;
+  width: 40%;
 }
