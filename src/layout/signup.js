@@ -13,6 +13,12 @@ const Signup = () => {
 
     setErrorMessage('');
 
+    if (!username || !email || !password) {
+      setErrorMessage('Please fill all fields');
+      M.toast({ html: 'Please fill all fields', classes: 'red' });
+      return;
+    }
+
     fetch('http://localhost:4000/users/signup', {
       method: 'POST',
       headers: {
