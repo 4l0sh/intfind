@@ -30,7 +30,7 @@ const Skills = () => {
                 <input className='inp2 range' type='range' min='1' max='5' />
                 <input className='inp1' placeholder='Type Here your skill' />
                 <input className='inp2 range' type='range' min='1' max='5' />
-                <span className='slider-value'>3</span>
+                <span id='slider-value'>3</span>
                 <input className='inp1' placeholder='Type Here your skill' />
                 <input className='inp2 range' type='range' min='1' max='5' />
                 <input className='inp1' placeholder='Type Here your skill' />
