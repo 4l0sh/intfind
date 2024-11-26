@@ -9,7 +9,7 @@ const Signup = () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    fetch('http://localhost:5000/users/signup', {
+    fetch('http://localhost:4000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,37 +24,43 @@ const Signup = () => {
   };
   return (
     <Fragment>
-      <div class='container'>
-        <div class='box1'>box 1</div>
-        <div class='box2'>
-          <div class='title'>
+      <div className='container'>
+        <div className='box1'>
+          <i className='fa-solid fa-arrow-left arrow-left'></i>
+          <p> Previous</p>
+        </div>
+        <div className='box2'>
+          <div className='title'>
             <h1>Sign Up</h1>
           </div>
-          <div class='signinForm'>
+          <div className='signinForm'>
             <form id='signup' onSubmit={signUserUp}>
               <input
-                class='input'
+                className='input'
                 type='username'
                 placeholder='Username'
                 id='username'
               />
               <input
-                class='input'
+                className='input'
                 type='email'
                 placeholder='Email'
                 id='email'
               />
               <input
-                class='input'
+                className='input'
                 type='password'
                 placeholder='password'
                 id='password'
               />
-              <input class='submit' type='submit' value='Sign Up' />
+              <input className='submit' type='submit' value='Sign Up' />
             </form>
           </div>
         </div>
-        <div class='box3'>box 3</div>
+        <div className='box3'>
+          <i className='fa-solid fa-arrow-right arrow-right'></i>
+          <p>Next</p>
+        </div>
       </div>
     </Fragment>
   );

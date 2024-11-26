@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
 const port = 4000;
 
 //middleware
+app.use(cors());
 app.use(express.json());
 
 //mongodb connection
@@ -17,27 +19,34 @@ MongoClient.connect(mongoUri)
     console.log('Connected to Database');
   })
   .catch((err) => {
-    console.log('Error connectin to database : ', err);
+    console.log('Error connecting to database : ', err);
   });
 
-//isnert user
+//insert user
 app.post('/users/signup', (req, res) => {
   const collection = db.collection('users');
-  const user = req.body;
-  collection
-    .insertOne(user)
-    .then((result) => {
-      const response = {
-        status: 200,
-        userId: result.insertedId,
-        message: 'User has been inserted successfully',
-      };
-      console.log('user added: ', response);
-      res.json(response);
-    })
-    .catch((err) => {
-      console.log('error adding user', err);
-    });
+  collection.findOne({ email: req.body.email }).then((existingUser) => {
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    const user = req.body;
+    collection
+      .insertOne(user)
+      .then((result) => {
+        const response = {
+          status: 200,
+          userId: result.insertedId,
+          message: 'User has been inserted successfully',
+        };
+        console.log('user added: ', response);
+        res.json(response);
+      })
+      .catch((err) => {
+        console.log('error adding user', err);
+        res.status(500).json({ message: 'Error adding user' });
+      });
+  });
 });
 
 app.listen(port, () => {
