@@ -35,7 +35,9 @@ const Skills = () => {
         </div>
         <div className='box2'>
           <div className='title'>
-            <h1> Skills</h1>
+            <bold>
+              <h1>Skills</h1>
+            </bold>
           </div>
           <div className='skillsDiv'>
             <div className='softSkills'>
