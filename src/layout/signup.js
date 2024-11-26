@@ -1,13 +1,17 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import M from 'materialize-css';
 import './signup.css';
 
 const Signup = () => {
+  const [errorMessage, setErrorMessage] = useState('');
+
   const signUserUp = (event) => {
     event.preventDefault();
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+
+    setErrorMessage('');
 
     fetch('http://localhost:4000/users/signup', {
       method: 'POST',
@@ -18,7 +22,12 @@ const Signup = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log('user added', result);
+        if (result.message === 'User already exists') {
+          setErrorMessage(result.message);
+          M.toast({ html: 'User already exists', classes: 'red' });
+        } else {
+          console.log('user added', result);
+        }
       })
       .catch((err) => console.log('error adding user', err));
   };
