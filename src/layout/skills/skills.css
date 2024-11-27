@@ -17,6 +17,7 @@
   margin: 2px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  font-size: 2vh;
 }
 .techSkills {
   display: flex;
@@ -28,6 +29,7 @@
   margin: 2px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  font-size: 2vh;
 }
 .softskillsForm,
 .techskillsForm {
@@ -40,7 +42,7 @@
 
 .inp1,
 .inp2 {
-  width: 40%;
+  width: 100%;
   margin: 3px;
   border: 2px solid black;
   background-color: white;
@@ -88,5 +90,9 @@
 }
 .range {
   margin-top: 15px;
-  width: 40%;
+  width: 100%;
+}
+.softSkills,
+.techSkills {
+  margin-top: -7vh;
 }
