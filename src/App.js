@@ -4,17 +4,22 @@ import Skills from './layout/skills/skills';
 import Wizard from './layout/wizard';
 import Opleiding from './layout//opleiding/opleiding';
 import Experience from './layout/experience/experience';
+import Referenties from "./layout/referenties/referenties";
 import './App.css';
+
 
 function App() {
   return (
     <Router>
       <Fragment>
         <Routes>
-          <Route exact path='/' element={<Wizard />} />
-          <Route exact path='/skills' element={<Skills />} />
-          <Route exact path='/opleiding' element={<Opleiding />} />
+
+          <Route exact path="/" element={<Wizard />} />
+          <Route exact path="/skills" element={<Skills />} />
+          <Route exact path="/opleiding" element={<Opleiding />} />
+          <Route exact path="/referenties" element={<Referenties />} />
           <Route exact path='/experience' element={<Experience />} />
+
         </Routes>
       </Fragment>
     </Router>
