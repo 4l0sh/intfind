@@ -7,8 +7,8 @@ function Referenties() {
   const navigate = useNavigate();
 
   // Functie om terug te navigeren
-  const redirectToOpleiding = () => {
-    navigate("/opleiding"); // Pas de route aan naar de juiste vorige pagina
+  const redirectToExperience = () => {
+    navigate("/experience"); // Pas de route aan naar de juiste vorige pagina
   };
 
   return (
@@ -16,7 +16,7 @@ function Referenties() {
       <div className="container">
         <div className="box1">
           <i
-            onClick={redirectToOpleiding} // Actie bij klikken op linker pijl
+            onClick={redirectToExperience} // Actie bij klikken op linker pijl
             className="fa-solid fa-arrow-left arrow-left"
           ></i>
           <p> Previous</p>
@@ -24,16 +24,16 @@ function Referenties() {
         <div className="box2">
           <div className="steps-container">
             <div className="step not-filled">
-              <i class="fa-solid fa-1"></i>
+              <i className="fa-solid fa-1"></i>
             </div>
             <div className="step not-filled">
-              <i class="fa-solid fa-2"></i>
+              <i className="fa-solid fa-2"></i>
             </div>
             <div className="step not-filled">
-              <i class="fa-solid fa-3"></i>
+              <i className="fa-solid fa-3"></i>
             </div>
             <div className="step filled">
-              <i class="fa-solid fa-4"></i>
+              <i className="fa-solid fa-4"></i>
             </div>
           </div>
           <div className="title">
