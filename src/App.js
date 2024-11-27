@@ -1,18 +1,20 @@
-import react, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Skills from './layout/skills/skills';
-import Wizard from './layout/wizard';
-import Opleiding from './layout//opleiding/opleiding';
-import './App.css';
+import react, { Fragment } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Skills from "./layout/skills/skills";
+import Wizard from "./layout/wizard";
+import Opleiding from "./layout//opleiding/opleiding";
+import Referenties from "./layout/referenties/referenties";
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <Fragment>
         <Routes>
-          <Route exact path='/' element={<Wizard />} />
-          <Route exact path='/skills' element={<Skills />} />
-          <Route exact path='/opleiding' element={<Opleiding />} />
+          <Route exact path="/" element={<Wizard />} />
+          <Route exact path="/skills" element={<Skills />} />
+          <Route exact path="/opleiding" element={<Opleiding />} />
+          <Route exact path="/referenties" element={<Referenties />} />
         </Routes>
       </Fragment>
     </Router>

@@ -1,0 +1,51 @@
+.referentieForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+  width: 100%;
+}
+.refentie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.refentieDiv {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.persoon,
+.beroep,
+.referentieText {
+  width: 38vw;
+  height: 5vh;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding-left: 2vw;
+  margin-top: 10px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.persoon:focus,
+.beroep:focus,
+.referentieText:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+.submit {
+  width: 100%;
+  height: 40px;
+  background-color: #007bff;
+  color: white;
+  border: 0;
+  margin-top: 10px;
+  border-radius: 15px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.referentieText {
+  height: 9vh;
+  padding-top: 1vh;
+  size-adjust: none;
+}
