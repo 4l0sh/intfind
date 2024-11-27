@@ -15,6 +15,16 @@ const Skills = () => {
   const value3Ref = useRef();
   const value4Ref = useRef();
   const value5Ref = useRef();
+  const techskill1Ref = useRef();
+  const techvalue1Ref = useRef();
+  const techskill2Ref = useRef();
+  const techvalue2Ref = useRef();
+  const techskill3Ref = useRef();
+  const techvalue3Ref = useRef();
+  const techskill4Ref = useRef();
+  const techvalue4Ref = useRef();
+  const techskill5Ref = useRef();
+  const techvalue5Ref = useRef();
 
   const redirectToSignup = () => {
     navigate('/');
@@ -73,6 +83,65 @@ const Skills = () => {
       })
       .catch((error) => {
         console.log('error adding skills', error);
+      });
+  };
+  //send tech skills to the server
+  const sendTechSkills = (e) => {
+    e.preventDefault();
+
+    let techskill1 = techskill1Ref.current.value;
+    let techvalue1 = techvalue1Ref.current.value;
+    let techskill2 = techskill2Ref.current.value;
+    let techvalue2 = techvalue2Ref.current.value;
+    let techskill3 = techskill3Ref.current.value;
+    let techvalue3 = techvalue3Ref.current.value;
+    let techskill4 = techskill4Ref.current.value;
+    let techvalue4 = techvalue4Ref.current.value;
+    let techskill5 = techskill5Ref.current.value;
+    let techvalue5 = techvalue5Ref.current.value;
+
+    console.log(
+      techskill1,
+      techvalue1,
+      techskill1,
+      techvalue1,
+      techskill2,
+      techvalue2,
+      techskill3,
+      techvalue3,
+      techskill4,
+      techvalue4,
+      techskill5,
+      techvalue5
+    );
+
+    const userId = localStorage.getItem('userId');
+    const techskills = {
+      techskill1,
+      techvalue1,
+      techskill2,
+      techvalue2,
+      techskill3,
+      techvalue3,
+      techskill4,
+      techvalue4,
+      techskill5,
+      techvalue5,
+    };
+    fetch('http://localhost:4000/techskills', {
+      method: 'Post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, techskills }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log('tech skills added', result);
+        M.toast({ html: 'Tech Skills added successfully', classes: 'green' });
+      })
+      .catch((error) => {
+        console.log('error adding tech skills', error);
       });
   };
 
@@ -166,11 +235,13 @@ const Skills = () => {
               <h2>Tech Skills</h2>
               <form className='techskillsForm' id='techskillsForm'>
                 <input
+                  ref={techskill1Ref}
                   id='techskill1'
                   className='inp1'
                   placeholder='Type Here your skill'
                 />
                 <input
+                  ref={techvalue1Ref}
                   id='techvalue1'
                   className='inp2 range'
                   type='range'
@@ -178,11 +249,13 @@ const Skills = () => {
                   max='5'
                 />
                 <input
+                  ref={techskill2Ref}
                   id='techskill2'
                   className='inp1'
                   placeholder='Type Here your skill'
                 />
                 <input
+                  ref={techvalue2Ref}
                   id='techvalue2'
                   className='inp2 range'
                   type='range'
@@ -190,11 +263,13 @@ const Skills = () => {
                   max='5'
                 />
                 <input
+                  ref={techskill3Ref}
                   id='techskill3'
                   className='inp1'
                   placeholder='Type Here your skill'
                 />
                 <input
+                  ref={techvalue3Ref}
                   id='techvalue3'
                   className='inp2 range'
                   type='range'
@@ -202,11 +277,13 @@ const Skills = () => {
                   max='5'
                 />
                 <input
+                  ref={techskill4Ref}
                   id='techskill4'
                   className='inp1'
                   placeholder='Type Here your skill'
                 />
                 <input
+                  ref={techvalue4Ref}
                   id='techvalue4'
                   className='inp2 range'
                   type='range'
@@ -214,18 +291,25 @@ const Skills = () => {
                   max='5'
                 />
                 <input
+                  ref={techskill5Ref}
                   id='techskill5'
                   className='inp1'
                   placeholder='Type Here your skill'
                 />
                 <input
+                  ref={techvalue5Ref}
                   id='techvalue5'
                   className='inp2 range'
                   type='range'
                   min='1'
                   max='5'
                 />
-                <input className='submit send' type='submit' value='Submit' />
+                <input
+                  onClick={sendTechSkills}
+                  className='submit send'
+                  type='submit'
+                  value='Submit'
+                />
               </form>
             </div>
           </div>
