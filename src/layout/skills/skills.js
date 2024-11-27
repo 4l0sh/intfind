@@ -1,27 +1,78 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './skills.css';
 
 const Skills = () => {
   const navigate = useNavigate();
+  const skill1Ref = useRef();
+  const skill2Ref = useRef();
+  const skill3Ref = useRef();
+  const skill4Ref = useRef();
+  const skill5Ref = useRef();
+  const value1Ref = useRef();
+  const value2Ref = useRef();
+  const value3Ref = useRef();
+  const value4Ref = useRef();
+  const value5Ref = useRef();
+
   const redirectToSignup = () => {
     navigate('/');
   };
 
-  function clicked() {
-    let skill = document.getElementById('inp1').value;
-    let range = document.getElementById('inp2').value;
-    document
-      .getElementById('softskillsForm')
-      .addEventListener('submit', (e) => {
-        e.preventDefault();
-        console.log(skill, range);
-      });
-  }
-
-  function redirectToOpleiding() {
+  const redirectToOpleiding = () => {
     navigate('/opleiding');
-  }
+  };
+
+  const clicked = (e) => {
+    e.preventDefault();
+
+    // Access the values from the refs
+    let skill1 = skill1Ref.current.value;
+    let value1 = value1Ref.current.value;
+    let skill2 = skill2Ref.current.value;
+    let value2 = value2Ref.current.value;
+    let skill3 = skill3Ref.current.value;
+    let value3 = value3Ref.current.value;
+    let skill4 = skill4Ref.current.value;
+    let value4 = value4Ref.current.value;
+    let skill5 = skill5Ref.current.value;
+    let value5 = value5Ref.current.value;
+
+    console.log(skill1, value1);
+    console.log(skill2, value2);
+    console.log(skill3, value3);
+    console.log(skill4, value4);
+    console.log(skill5, value5);
+
+    // Send the data to the server
+    const userId = localStorage.getItem('userId');
+    const skills = {
+      skill1,
+      value1,
+      skill2,
+      value2,
+      skill3,
+      value3,
+      skill4,
+      value4,
+      skill5,
+      value5,
+    };
+    fetch('http://localhost:4000/skills', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, skills }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log('skills added', result);
+      })
+      .catch((error) => {
+        console.log('error adding skills', error);
+      });
+  };
 
   return (
     <div>
@@ -35,34 +86,72 @@ const Skills = () => {
         </div>
         <div className='box2'>
           <div className='title'>
-            <bold>
-              <h1>Skills</h1>
-            </bold>
+            <h1>Skills</h1>
           </div>
           <div className='skillsDiv'>
             <div className='softSkills'>
               <h2>Soft Skills</h2>
               <form className='softskillsForm' id='softskillsForm'>
                 <input
-                  id='inp1'
+                  ref={skill1Ref}
                   className='inp1'
                   placeholder='Type Here your skill'
                 />
                 <input
-                  id='inp2'
+                  ref={value1Ref}
                   className='inp2 range'
                   type='range'
                   min='1'
                   max='5'
                 />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
+                <input
+                  ref={skill2Ref}
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  ref={value2Ref}
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
+                <input
+                  ref={skill3Ref}
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  ref={value3Ref}
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
+                <input
+                  ref={skill4Ref}
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  ref={value4Ref}
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
+                <input
+                  ref={skill5Ref}
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  ref={value5Ref}
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
                 <input
                   onClick={clicked}
                   className='submit send'

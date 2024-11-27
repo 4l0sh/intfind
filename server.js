@@ -49,36 +49,36 @@ app.post('/users/signup', (req, res) => {
   });
 });
 
-app.post('/users/skills', (req, res) => {
-  const { userId, softSkills, techSkills } = req.body;
+//insert skills
+app.post('/skills', (req, res) => {
+  const collection = db.collection('skills');
+  const skills = req.body.skills;
+  const userId = req.body.userId;
 
-  if (!userId || !softSkills || !techSkills) {
-    return res.status(400).json({ message: 'Missing data' });
+  if (!userId) {
+    console.log('User not logged in');
+    return res.status(400).json({ message: 'You are not logged in ' });
   }
-
-  const collection = db.collection('users');
-
+  const skillsWithId = {
+    ...skills,
+    userId: userId,
+  };
   collection
-    .updateOne(
-      { _id: new MongoClient.ObjectId(userId) },
-      {
-        $set: {
-          softSkills,
-          techSkills,
-        },
-      }
-    )
+    .insertOne(skillsWithId)
     .then((result) => {
-      if (result.matchedCount === 0) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-      res.status(200).json({ message: 'Skills updated successfully' });
+      const response = {
+        status: 200,
+        message: 'Skills have been inserted successfully',
+      };
+      console.log('skills added: ', response);
+      res.json(response);
     })
-    .catch((err) => {
-      console.log('Error updating skills:', err);
-      res.status(500).json({ message: 'Error updating skills' });
+    .catch((error) => {
+      console.log('error adding skills', error);
+      res.status(500).json({ message: 'Error adding skills' });
     });
 });
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

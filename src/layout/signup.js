@@ -40,6 +40,7 @@ const Signup = () => {
         } else {
           console.log('user added', result);
           localStorage.setItem('userId', result.userId);
+          navigate('/skills');
         }
       })
       .catch((err) => console.log('error adding user', err));
