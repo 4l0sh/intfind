@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Skills from './layout/skills/skills';
 import Wizard from './layout/wizard';
 import Opleiding from './layout//opleiding/opleiding';
+import Experience from './layout/experience/experience';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Route exact path='/' element={<Wizard />} />
           <Route exact path='/skills' element={<Skills />} />
           <Route exact path='/opleiding' element={<Opleiding />} />
+          <Route exact path='/experience' element={<Experience />} />
         </Routes>
       </Fragment>
     </Router>

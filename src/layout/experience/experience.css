@@ -1,0 +1,41 @@
+.maincontainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  gap: 10px;
+}
+.addBtn {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+.addBtn:hover {
+  background-color: rgba(0, 0, 151, 0.9);
+  border: 1px solid white;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
+  cursor: pointer;
+}
+.addBtn:active {
+  transform: translateY(0);
+  transition: 0.2s;
+}
+.addInput {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}

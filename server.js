@@ -108,6 +108,34 @@ app.post('/opleiding', (req, res) => {
     });
 });
 
+//insert experience
+app.post('/experience', (req, res) => {
+  const collection = db.collection('experience');
+  const experience = req.body.inputs;
+  const userId = req.body.userId;
+
+  if (!userId) {
+    console.log('User not logged in');
+    return res.status(400).json({ message: 'You are not logged in' });
+  }
+  const experienceWithId = {
+    _id: userId,
+    ...experience,
+  };
+  collection
+    .insertOne(experienceWithId)
+    .then((result) => {
+      const response = {
+        status: 200,
+        message: 'Experience has been inserted successfully',
+      };
+      console.log('experience added', response);
+    })
+    .catch((error) => {
+      console.log('error adding experience', error);
+      res.status(500).json({ message: 'Error adding experience' });
+    });
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

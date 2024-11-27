@@ -42,6 +42,10 @@ const Opleiding = () => {
       });
   };
 
+  const redirectToExperience = () => {
+    navigate('/experience');
+  };
+
   return (
     <Fragment>
       <div className='container'>
@@ -92,7 +96,10 @@ const Opleiding = () => {
           </div>
         </div>
         <div className='box3'>
-          <i className='fa-solid fa-arrow-right arrow-right'></i>
+          <i
+            onClick={redirectToExperience}
+            className='fa-solid fa-arrow-right arrow-right'
+          ></i>
           <p>Next</p>
         </div>
       </div>
