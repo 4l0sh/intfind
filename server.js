@@ -60,8 +60,8 @@ app.post('/skills', (req, res) => {
     return res.status(400).json({ message: 'You are not logged in ' });
   }
   const skillsWithId = {
+    _id: userId,
     ...skills,
-    userId: userId,
   };
   collection
     .insertOne(skillsWithId)
