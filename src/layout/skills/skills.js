@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import M from 'materialize-css';
 import './skills.css';
 
 const Skills = () => {
@@ -68,6 +69,7 @@ const Skills = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log('skills added', result);
+        M.toast({ html: 'Soft Skills added successfully', classes: 'green' });
       })
       .catch((error) => {
         console.log('error adding skills', error);
@@ -163,16 +165,66 @@ const Skills = () => {
             <div className='techSkills'>
               <h2>Tech Skills</h2>
               <form className='techskillsForm' id='techskillsForm'>
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
-                <input className='inp1' placeholder='Type Here your skill' />
-                <input className='inp2 range' type='range' min='1' max='5' />
+                <input
+                  id='techskill1'
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  id='techvalue1'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
+                <input
+                  id='techskill2'
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  id='techvalue2'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
+                <input
+                  id='techskill3'
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  id='techvalue3'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
+                <input
+                  id='techskill4'
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  id='techvalue4'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
+                <input
+                  id='techskill5'
+                  className='inp1'
+                  placeholder='Type Here your skill'
+                />
+                <input
+                  id='techvalue5'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
+                />
                 <input className='submit send' type='submit' value='Submit' />
               </form>
             </div>
