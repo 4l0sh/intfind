@@ -79,6 +79,35 @@ app.post('/skills', (req, res) => {
     });
 });
 
+//insert opleiding
+app.post('/opleiding', (req, res) => {
+  const collection = db.collection('opleiding');
+  const opleiding = req.body.Opleiding;
+  const userId = req.body.userId;
+
+  if (!userId) {
+    console.log('User not logged in');
+    return res.status(400).json({ message: 'You are not logged in' });
+  }
+  const opleidingWithId = {
+    _id: userId,
+    ...opleiding,
+  };
+  collection
+    .insertOne(opleidingWithId)
+    .then((result) => {
+      const response = {
+        status: 200,
+        message: 'Opleiding has been inserted successfully',
+      };
+      console.log('opleiding added', response);
+    })
+    .catch((error) => {
+      console.log('error adding opleiding', error);
+      res.status(500).json({ message: 'Error adding opleiding' });
+    });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
