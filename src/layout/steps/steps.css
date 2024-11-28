@@ -1,0 +1,28 @@
+.steps-container {
+  display: flex;
+  gap: 10px;
+}
+
+.step {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  height: 5vw;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  margin-top: -10px;
+  transition: 0.3s ease;
+}
+
+.step {
+  font-size: 2vw;
+}
+
+.active-step {
+  background-color: #007bff;
+  font-size: 3vw;
+  box-shadow: 0 0 10px #0056b3;
+  transform: translateY(-10px);
+  transition: 0.3s ease;
+}
