@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import M from "materialize-css";
 import "./referenties.css";
+import Steps from "../steps/steps";
 
 function Referenties() {
   const navigate = useNavigate();
@@ -22,20 +23,7 @@ function Referenties() {
           <p> Previous</p>
         </div>
         <div className="box2">
-          <div className="steps-container">
-            <div className="step not-filled">
-              <i className="fa-solid fa-1"></i>
-            </div>
-            <div className="step not-filled">
-              <i className="fa-solid fa-2"></i>
-            </div>
-            <div className="step not-filled">
-              <i className="fa-solid fa-3"></i>
-            </div>
-            <div className="step filled">
-              <i className="fa-solid fa-4"></i>
-            </div>
-          </div>
+          <Steps currentStep={5} />
           <div className="title">
             <h1>Referenties</h1>
           </div>

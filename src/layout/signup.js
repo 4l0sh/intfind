@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import M from "materialize-css";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
+import Steps from "./steps/steps";
 
 const Signup = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -51,20 +52,7 @@ const Signup = () => {
       <div className="container">
         <div className="box1"></div>
         <div className="box2">
-          <div className="steps-container">
-            <div className="step filled">
-              <i class="fa-solid fa-1"></i>
-            </div>
-            <div className="step not-filled">
-              <i class="fa-solid fa-2"></i>
-            </div>
-            <div className="step not-filled">
-              <i class="fa-solid fa-3"></i>
-            </div>
-            <div className="step not-filled">
-              <i class="fa-solid fa-4"></i>
-            </div>
-          </div>
+          <Steps currentStep={1} />
           <div className="title">
             <h1>Sign Up</h1>
           </div>

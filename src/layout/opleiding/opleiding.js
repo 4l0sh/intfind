@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import "./opleiding.css";
+import Steps from "../steps/steps";
 
 const Opleiding = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const Opleiding = () => {
   };
 
   const redirectToExperience = () => {
-    navigate('/experience');
+    navigate("/experience");
   };
 
   return (
@@ -61,20 +62,7 @@ const Opleiding = () => {
           <p> Previous</p>
         </div>
         <div className="box2">
-          <div className="steps-container">
-            <div className="step not-filled">
-              <i class="fa-solid fa-1"></i>
-            </div>
-            <div className="step not-filled">
-              <i class="fa-solid fa-2"></i>
-            </div>
-            <div className="step filled">
-              <i class="fa-solid fa-3"></i>
-            </div>
-            <div className="step not-filled">
-              <i class="fa-solid fa-4"></i>
-            </div>
-          </div>
+          <Steps currentStep={3} />
           <div className="title">
             <h1>Opleiding</h1>
           </div>
@@ -113,10 +101,10 @@ const Opleiding = () => {
             </form>
           </div>
         </div>
-        <div className='box3'>
+        <div className="box3">
           <i
             onClick={redirectToExperience}
-            className='fa-solid fa-arrow-right arrow-right'
+            className="fa-solid fa-arrow-right arrow-right"
           ></i>
           <p>Next</p>
         </div>

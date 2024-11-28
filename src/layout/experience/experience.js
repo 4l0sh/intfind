@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import Btn from "./btn";
+import Steps from "../steps/steps";
 
 const Experience = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Experience = () => {
           <p> Previous</p>
         </div>
         <div className="box2">
+          <Steps currentStep={4} />
           <div className="title">
             <h1>Work experience</h1>
           </div>

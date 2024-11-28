@@ -15,7 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.1s ease;
+  transition: 0.5s ease;
 }
 .box1,
 .box3 {
@@ -123,14 +123,6 @@
   background-color: red;
   color: white;
   border-radius: 20px;
-}
-.filled {
-  background-color: #007bff;
-  font-size: 3vw;
-  box-shadow: 0 0 10px #0056b3;
-}
-.not-filled {
-  font-size: 3vw;
 }
 .steps-container {
   display: flex;
