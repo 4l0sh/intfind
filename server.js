@@ -166,6 +166,34 @@ app.post('/experience', (req, res) => {
       res.status(500).json({ message: 'Error adding experience' });
     });
 });
+
+//insert referenties
+app.post('/referenties', (req, res) => {
+  const collection = db.collection('referenties');
+  const referentie = req.body.referentie;
+  const userId = req.body.userId;
+
+  if (!userId) {
+    console.log('User not logged in');
+    return res.status(400).json({ message: 'You are not logged in' });
+  }
+  const referentieWithId = {
+    _id: userId,
+    ...referentie,
+  };
+  collection
+    .insertOne(referentieWithId)
+    .then((result) => {
+      const response = {
+        status: 200,
+        message: 'Referentie has been inserted successfully',
+      };
+      console.log('referentie added', response);
+    })
+    .catch((err) => {
+      console.log('error adding references', err);
+    });
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../experience/experience.css';
+import M from 'materialize-css';
 const ToggleInputs = () => {
   // State to store input fields with their IDs and values
   const [inputs, setInputs] = useState([]);
@@ -21,21 +22,37 @@ const ToggleInputs = () => {
     setInputs(newInputs);
   };
 
+  //userId
+  const userId = localStorage.getItem('userId');
+
   // Function to simulate adding inputs to a database
   const handleSaveToDatabase = () => {
     // Example of saving inputs to a database (e.g., using an API call)
     console.log('Saving inputs to database:', inputs);
     // In a real app, you'd make an API request here.
+    fetch('http://localhost:4000/experience', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, inputs }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log('experience added', result);
+        M.toast({ html: 'Experience added', classes: 'green' });
+      })
+      .catch((error) => console.log('error adding experience', error));
   };
 
   return (
     <div className='maincontainer'>
       <div className='btnContainer'>
         <button className='addBtn' onClick={toggleInputField}>
-          Add Experienc Field
+          Add experience Field
         </button>
         <button className='addBtn' onClick={handleSaveToDatabase}>
-          Save to Database
+          Submit
         </button>
       </div>
       {/* Render each input field based on the state */}

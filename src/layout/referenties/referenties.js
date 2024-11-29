@@ -1,57 +1,83 @@
-import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import M from "materialize-css";
-import "./referenties.css";
-import Steps from "../steps/steps";
+import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import M from 'materialize-css';
+import './referenties.css';
+import Steps from '../steps/steps';
 
 function Referenties() {
   const navigate = useNavigate();
 
-  // Functie om terug te navigeren
   const redirectToExperience = () => {
-    navigate("/experience"); // Pas de route aan naar de juiste vorige pagina
+    navigate('/experience');
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const persoon = document.getElementById('persoon').value;
+    const beroep = document.getElementById('beroep').value;
+    const referentieText = document.getElementById('referentieText').value;
+    const userId = localStorage.getItem('userId');
+
+    fetch('http://localhost:4000/referenties', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId,
+        referentie: { persoon, beroep, referentieText },
+      }),
+    });
   };
 
   return (
     <div>
-      <div className="container">
-        <div className="box1">
+      <div className='container'>
+        <div className='box1'>
           <i
-            onClick={redirectToExperience} // Actie bij klikken op linker pijl
-            className="fa-solid fa-arrow-left arrow-left"
+            onClick={redirectToExperience}
+            className='fa-solid fa-arrow-left arrow-left'
           ></i>
           <p> Previous</p>
         </div>
-        <div className="box2">
+        <div className='box2'>
           <Steps currentStep={5} />
-          <div className="title">
+          <div className='title'>
             <h1>Referenties</h1>
           </div>
-          <div className="referentieDiv">
-            <form className="referentieForm" id="referentiesForm">
+          <div className='referentieDiv'>
+            <form className='referentieForm' id='referentiesForm'>
               <input
-                type="text"
-                className="persoon"
-                placeholder="Persoon"
+                id='persoon'
+                type='text'
+                className='persoon'
+                placeholder='Persoon'
                 required
               ></input>
               <input
-                type="text"
-                className="beroep"
-                placeholder="Beroep"
+                id='beroep'
+                type='text'
+                className='beroep'
+                placeholder='Beroep'
                 required
               ></input>
               <textarea
-                type="text"
-                className="referentieText"
-                placeholder="Referentie Text"
+                id='referentieText'
+                type='text'
+                className='referentieText'
+                placeholder='Referentie Text'
                 required
               ></textarea>
-              <input type="submit" className="submit"></input>
+              <input
+                onClick={onSubmit}
+                type='submit'
+                className='submit'
+                value='Submit'
+              ></input>
             </form>
           </div>
         </div>
-        <div className="box3"></div>
+        <div className='box3'></div>
       </div>
     </div>
   );
