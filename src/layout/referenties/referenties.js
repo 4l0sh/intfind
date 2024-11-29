@@ -18,16 +18,21 @@ function Referenties() {
     const referentieText = document.getElementById('referentieText').value;
     const userId = localStorage.getItem('userId');
 
-    fetch('http://localhost:4000/referenties', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId,
-        referentie: { persoon, beroep, referentieText },
-      }),
-    });
+    if (!userId) {
+      M.toast({ html: 'You are not logged in', classes: 'red' });
+    } else {
+      fetch('http://localhost:4000/referenties', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          referentie: { persoon, beroep, referentieText },
+        }),
+      });
+      M.toast({ html: 'Referentie has been added', classes: 'green' });
+    }
   };
 
   return (

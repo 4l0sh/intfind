@@ -21,12 +21,28 @@ const Login = () => {
       .then((result) => {
         const userId = result.userId;
         localStorage.setItem('userId', userId);
-        navigate('/');
+        if (userId) {
+          navigate('/');
+        } else {
+          M.toast({ html: 'Invalid email or password', classes: 'red auth' });
+        }
       })
       .catch((err) => {
         console.log('error logging in', err);
         M.toast({ html: 'Error logging in', classes: 'red' });
       });
+  };
+
+  const change = () => {
+    const password = document.getElementById('password');
+    const closed = document.getElementById('closed');
+    if (password.type === 'password') {
+      password.type = 'text';
+      closed.className = 'fa-solid fa-eye';
+    } else {
+      password.type = 'password';
+      closed.className = 'fa-solid fa-eye-low-vision';
+    }
   };
   return (
     <Fragment>
@@ -64,6 +80,11 @@ const Login = () => {
                   type='password'
                   placeholder='Password'
                   required
+                />{' '}
+                <i
+                  onClick={change}
+                  id='closed'
+                  class='fa-solid fa-eye-low-vision'
                 />
                 <input
                   onClick={onSubmit}

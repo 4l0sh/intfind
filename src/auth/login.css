@@ -90,7 +90,7 @@
 h1 {
   font-size: 2.5em;
   margin-bottom: 20px;
-  color: #ecf0f1;
+  color: #2980b9;
   transition: color 0.3s ease;
 }
 
@@ -136,4 +136,16 @@ h1:hover {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.auth {
+  width: 30%;
+  position: fixed;
+  left: 50%;
+  margin-top: 140px;
+  transform: translateX(-50%);
+}
+
+i {
+  cursor: pointer;
 }

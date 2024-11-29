@@ -1,4 +1,4 @@
-import react, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Skills from './layout/skills/skills';
 import Wizard from './layout/wizard';

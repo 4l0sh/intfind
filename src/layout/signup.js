@@ -48,49 +48,6 @@ const Signup = () => {
       .catch((err) => console.log('error adding user', err));
   };
 
-  // const signUserUp = (event) => {
-  //   event.preventDefault();
-
-  //   const username = document.getElementById('username').value;
-  //   const email = document.getElementById('email').value;
-  //   const password = document.getElementById('password').value;
-  //   const photo = document.getElementById('photo').files[0];
-
-  //   setErrorMessage('');
-
-  //   if (!username || !email || !password) {
-  //     setErrorMessage('Please fill all fields');
-  //     M.toast({ html: 'Please fill all fields', classes: 'red' });
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   formData.append('username', username);
-  //   formData.append('email', email);
-  //   formData.append('password', password);
-
-  //   if (photo) {
-  //     formData.append('photo', photo);
-  //   }
-
-  //   fetch('http://localhost:4000/users/signup', {
-  //     method: 'POST',
-  //     body: formData,
-  //   })
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       if (result.message === 'User already exists') {
-  //         setErrorMessage(result.message);
-  //         M.toast({ html: 'User already exists', classes: 'red' });
-  //       } else {
-  //         console.log('user added', result);
-  //         localStorage.setItem('userId', result.userId);
-  //         navigate('/skills');
-  //       }
-  //     })
-  //     .catch((err) => console.log('error adding user', err));
-  // };
-
   return (
     <Fragment>
       <div className='container'>
@@ -138,6 +95,13 @@ const Signup = () => {
               />
               <input className='submit' type='submit' value='Sign Up' />
             </form>
+            <hr />
+            <p>
+              Already have an account?{' '}
+              <a id='loginBtn' href='/login'>
+                Log In
+              </a>
+            </p>
           </div>
         </div>
         <div className='box3'>

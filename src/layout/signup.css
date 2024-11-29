@@ -173,3 +173,13 @@
   transform: translateY(-3px);
   transition: 0.3s ease;
 }
+hr {
+  width: 100%;
+}
+a {
+  color: #007bff;
+}
+
+a:hover {
+  color: #0056b3;
+}
