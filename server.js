@@ -194,6 +194,24 @@ app.post('/referenties', (req, res) => {
       console.log('error adding references', err);
     });
 });
+
+app.post('/login', (req, res) => {
+  const collection = db.collection('users');
+  collection
+    .findOne({ email: req.body.email, password: req.body.password })
+    .then((result) => {
+      const response = {
+        status: 200,
+        userId: result._id,
+        message: `User ${result.username} has been logged in successfully`,
+      };
+      res.json(response);
+    })
+    .catch((err) => {
+      console.log('error logging in', err);
+      res.status(500).json({ message: 'Error logging in' });
+    });
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

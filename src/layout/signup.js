@@ -17,6 +17,7 @@ const Signup = () => {
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const photo = document.getElementById('photo').files[0];
 
     setErrorMessage('');
 
@@ -31,7 +32,7 @@ const Signup = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ username, email, password, photo }),
     })
       .then((response) => response.json())
       .then((result) => {
@@ -46,6 +47,49 @@ const Signup = () => {
       })
       .catch((err) => console.log('error adding user', err));
   };
+
+  // const signUserUp = (event) => {
+  //   event.preventDefault();
+
+  //   const username = document.getElementById('username').value;
+  //   const email = document.getElementById('email').value;
+  //   const password = document.getElementById('password').value;
+  //   const photo = document.getElementById('photo').files[0];
+
+  //   setErrorMessage('');
+
+  //   if (!username || !email || !password) {
+  //     setErrorMessage('Please fill all fields');
+  //     M.toast({ html: 'Please fill all fields', classes: 'red' });
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+  //   formData.append('username', username);
+  //   formData.append('email', email);
+  //   formData.append('password', password);
+
+  //   if (photo) {
+  //     formData.append('photo', photo);
+  //   }
+
+  //   fetch('http://localhost:4000/users/signup', {
+  //     method: 'POST',
+  //     body: formData,
+  //   })
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       if (result.message === 'User already exists') {
+  //         setErrorMessage(result.message);
+  //         M.toast({ html: 'User already exists', classes: 'red' });
+  //       } else {
+  //         console.log('user added', result);
+  //         localStorage.setItem('userId', result.userId);
+  //         navigate('/skills');
+  //       }
+  //     })
+  //     .catch((err) => console.log('error adding user', err));
+  // };
 
   return (
     <Fragment>
@@ -64,6 +108,22 @@ const Signup = () => {
                 placeholder='Username'
                 id='username'
               />
+              <div className='custom-file-input'>
+                <input
+                  className='imginput'
+                  type='file'
+                  name='file'
+                  id='photo'
+                  accept='image/*'
+                />
+                <button
+                  type='button'
+                  className='custom-file-button'
+                  onClick={() => document.getElementById('photo').click()}
+                >
+                  Upload Photo
+                </button>
+              </div>
               <input
                 className='input'
                 type='email'
