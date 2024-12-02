@@ -8,8 +8,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  animation: gradientAnimation 10s ease infinite;
 }
-
 #logo {
   width: 15%;
   filter: brightness(0) invert(1);
@@ -30,7 +30,9 @@
   padding: 20px;
   width: 100%;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .headerDiv1,
@@ -71,7 +73,7 @@
   background: rgba(44, 62, 80, 0.8);
   border-radius: 15px;
   padding: 30px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
@@ -148,4 +150,43 @@ h1:hover {
 
 i {
   cursor: pointer;
+}
+
+.footerContainer {
+  background: rgba(52, 152, 219, 0.2);
+  backdrop-filter: blur(12px);
+  height: 15vh;
+  width: 99%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 0px 40px rgba(0, 0, 0, 0.3);
+}
+.footerDiv1,
+.footerDiv2,
+.footerDiv3 {
+  border: 2px solid black;
+  width: 33%;
+  height: 80%;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+  }
+  25% {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+  }
+  50% {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+  }
+  75% {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+  }
+  100% {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+  }
 }

@@ -97,11 +97,11 @@ const Login = () => {
           </div>
           <div className='div loginDiv3'></div>
         </div>
-        {/* <div className='footerContainer'>
-          <div className='div footerDiv1'>1</div>
-          <div className='div footerDiv2'>2</div>
-          <div className='div footerDiv3'>3</div>
-        </div> */}
+        <div className='footerContainer'>
+          <div className='div footerDiv1'>PlaceHolders</div>
+          <div className='div footerDiv2'>PlaceHolders</div>
+          <div className='div footerDiv3'>PlaceHolders</div>
+        </div>
       </div>
     </Fragment>
   );
