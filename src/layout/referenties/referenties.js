@@ -25,11 +25,14 @@ function Referenties() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify({
           userId,
           referentie: { persoon, beroep, referentieText },
         }),
+      }).catch((err) => {
+        console.log('error adding references', err);
       });
       M.toast({ html: 'Referentie has been added', classes: 'green' });
     }

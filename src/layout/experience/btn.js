@@ -22,18 +22,14 @@ const ToggleInputs = () => {
     setInputs(newInputs);
   };
 
-  //userId
   const userId = localStorage.getItem('userId');
 
-  // Function to simulate adding inputs to a database
   const handleSaveToDatabase = () => {
-    // Example of saving inputs to a database (e.g., using an API call)
-    console.log('Saving inputs to database:', inputs);
-    // In a real app, you'd make an API request here.
     fetch('http://localhost:4000/experience', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({ userId, inputs }),
     })

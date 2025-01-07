@@ -17,7 +17,7 @@ const Signup = () => {
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const photo = document.getElementById('photo').files[0];
+    const role = 'student';
 
     setErrorMessage('');
 
@@ -32,7 +32,7 @@ const Signup = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, email, password, photo }),
+      body: JSON.stringify({ username, email, password }),
     })
       .then((response) => response.json())
       .then((result) => {
@@ -42,7 +42,22 @@ const Signup = () => {
         } else {
           console.log('user added', result);
           localStorage.setItem('userId', result.userId);
+          localStorage.setItem('token', result.token);
           navigate('/skills');
+
+          // Add role after user is successfully added
+          fetch('http://localhost:4000/users/roles', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ role, userId: result.userId }),
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log('role added', result);
+            })
+            .catch((err) => console.log('error adding role', err));
         }
       })
       .catch((err) => console.log('error adding user', err));
@@ -65,22 +80,6 @@ const Signup = () => {
                 placeholder='Username'
                 id='username'
               />
-              <div className='custom-file-input'>
-                <input
-                  className='imginput'
-                  type='file'
-                  name='file'
-                  id='photo'
-                  accept='image/*'
-                />
-                <button
-                  type='button'
-                  className='custom-file-button'
-                  onClick={() => document.getElementById('photo').click()}
-                >
-                  Upload Photo
-                </button>
-              </div>
               <input
                 className='input'
                 type='email'

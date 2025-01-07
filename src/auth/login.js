@@ -20,6 +20,7 @@ const Login = () => {
       .then((response) => response.json())
       .then((result) => {
         const userId = result.userId;
+        localStorage.setItem('token', result.token);
         localStorage.setItem('userId', userId);
         if (userId) {
           navigate('/');
@@ -98,9 +99,9 @@ const Login = () => {
           <div className='div loginDiv3'></div>
         </div>
         <div className='footerContainer'>
-          <div className='div footerDiv1'>PlaceHolders</div>
+          {/* <div className='div footerDiv1'>PlaceHolders</div>
           <div className='div footerDiv2'>PlaceHolders</div>
-          <div className='div footerDiv3'>PlaceHolders</div>
+          <div className='div footerDiv3'>PlaceHolders</div> */}
         </div>
       </div>
     </Fragment>

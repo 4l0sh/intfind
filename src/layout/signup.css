@@ -11,7 +11,7 @@
 .box3 {
   width: 30%;
   height: 400px;
-
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,9 @@
   border-radius: 10px;
   padding-left: 5%;
   margin-top: 10px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .input:focus {
@@ -71,7 +73,9 @@
   border: 0;
   margin-top: 10px;
   border-radius: 15px;
-  transition: background-color 0.3s, transform 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
 }
 
 .submit:hover {

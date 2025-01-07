@@ -3,6 +3,8 @@ const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
 const port = 4000;
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = 'intfind';
 
 //middleware
 app.use(cors());
@@ -22,6 +24,24 @@ MongoClient.connect(mongoUri)
     console.log('Error connecting to database : ', err);
   });
 
+//verify User
+function verifyToken(req, res, next) {
+  const token = req.header('Authorization')?.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ error: 'Unautorized: no token' });
+  }
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET, {
+      iss: 'http://localhost:4000',
+    });
+    req.user = decoded;
+    next();
+  } catch (err) {
+    console.log('error verifying token', err);
+    return res.status(401).json({ error: 'Unautorized: invalid token' });
+  }
+}
+
 //insert user
 app.post('/users/signup', (req, res) => {
   const collection = db.collection('users');
@@ -34,10 +54,21 @@ app.post('/users/signup', (req, res) => {
     collection
       .insertOne(user)
       .then((result) => {
+        const token = jwt.sign(
+          {
+            userId: result._id,
+            username: result.username,
+            iss: 'http://localhost:4000',
+            role: 'student',
+          },
+          JWT_SECRET,
+          { expiresIn: '1h' }
+        );
         const response = {
           status: 200,
           userId: result.insertedId,
-          message: 'User has been inserted successfully',
+          message: `User ${result.username} has been inserted successfully`,
+          token: token,
         };
         console.log('user added: ', response);
         res.json(response);
@@ -47,6 +78,26 @@ app.post('/users/signup', (req, res) => {
         res.status(500).json({ message: 'Error adding user' });
       });
   });
+});
+
+//insert role
+app.post('/users/roles', (req, res) => {
+  const collection = db.collection('roles');
+  const role = req.body.role;
+  const userId = req.body.userId;
+
+  collection
+    .insertOne({ _id: userId, role: role })
+    .then((response) => {
+      res.status(200).json({ message: 'Role has been inserted successfully' });
+    })
+    .then((result) => {
+      console.log('role added');
+    })
+    .catch((err) => {
+      console.log('error adding role', err);
+      res.status(500).json({ message: 'Error adding role' });
+    });
 });
 
 //insert skills
@@ -139,7 +190,7 @@ app.post('/opleiding', (req, res) => {
 });
 
 //insert experience
-app.post('/experience', (req, res) => {
+app.post('/experience', verifyToken, (req, res) => {
   const collection = db.collection('experience');
   const experience = req.body.inputs;
   const userId = req.body.userId;
@@ -168,7 +219,7 @@ app.post('/experience', (req, res) => {
 });
 
 //insert referenties
-app.post('/referenties', (req, res) => {
+app.post('/referenties', verifyToken, (req, res) => {
   const collection = db.collection('referenties');
   const referentie = req.body.referentie;
   const userId = req.body.userId;
@@ -201,10 +252,23 @@ app.post('/login', (req, res) => {
   collection
     .findOne({ email: req.body.email, password: req.body.password })
     .then((result) => {
+      if (!result) {
+        return res.status(401).json({ message: 'Invalid email or password' });
+      }
+      const token = jwt.sign(
+        {
+          userId: result._id,
+          username: result.username,
+          iss: 'http://localhost:3000',
+        },
+        JWT_SECRET,
+        { expiresIn: '1h' }
+      );
       const response = {
         status: 200,
         userId: result._id,
         message: `User ${result.username} has been logged in successfully`,
+        token: token,
       };
       res.json(response);
     })
