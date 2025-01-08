@@ -99,6 +99,12 @@ const Login = () => {
                     Register
                   </a>
                 </p>
+                <p>
+                  Log in using verification code{' '}
+                  <a href='/loginTest' className='link'>
+                    here
+                  </a>
+                </p>
               </form>
             </div>
           </div>
