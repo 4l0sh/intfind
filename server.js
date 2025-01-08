@@ -277,6 +277,22 @@ app.post('/login', (req, res) => {
       res.status(500).json({ message: 'Error logging in' });
     });
 });
+
+app.post('/findUser', (req, res) => {
+  const collection = db.collection('users');
+  const email = req.body.email;
+  collection.findOne({ email: email }).then((result) => {
+    if (!result) {
+      return res.status(401).json({ message: 'User not found' });
+    }
+    const response = {
+      status: 200,
+      userId: result._id,
+      message: `User ${result.username} has been found`,
+    };
+    res.json(response);
+  });
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

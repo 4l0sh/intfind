@@ -1,0 +1,123 @@
+import React, { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import M from 'materialize-css';
+import emailjs from 'emailjs-com';
+
+const LoginTest = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const generateCode = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+  };
+  const sendEmail = (e) => {
+    e.preventDefault();
+    fetch('http://localhost:4000/findUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.message === 'User not found') {
+          M.toast({
+            html: 'User not found Please sign up',
+            classes: 'red auth',
+          });
+        } else {
+          M.toast({ html: 'User  found', classes: 'blue auth' });
+          const code = generateCode();
+
+          const templateParams = {
+            to_email: email,
+            code: code,
+          };
+          emailjs
+            .send(
+              'service_74cz9qy',
+              'template_l5mg53n',
+              templateParams,
+              'KB7p7JbxPCkcrn0xq'
+            )
+            .then(
+              (result) => {
+                console.log('Email sent successfully:', result.text);
+                setMessage('Verification code sent!');
+              },
+              (error) => {
+                console.error('Error sending email:', error.text);
+                setMessage('Failed to send email');
+              }
+            );
+        }
+      });
+
+    //   .then(() => {
+    //     navigate('/skills');
+    //   });
+  };
+  return (
+    <Fragment>
+      <div className='body'>
+        <div className='headerContainer'>
+          <div className='div headerDiv1'></div>
+          <div className='div headerDiv2'>
+            <img
+              id='logo'
+              src={require('../../images/intfind.png')}
+              alt='Intfind'
+            />
+          </div>
+          <div className='div headerDiv3'>
+            <div class='moon-solid icon'></div>
+          </div>
+        </div>
+        <div className='loginContainer'>
+          <div className='div loginDiv1'></div>
+          <div className='div loginDiv2'>
+            <div className='login'>
+              {' '}
+              <h1>Log In </h1>
+              <form className='loginForm'>
+                <input
+                  className='loginInput'
+                  id='email'
+                  type='email'
+                  placeholder='Email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+
+                <input
+                  onClick={sendEmail}
+                  className='loginInput'
+                  type='submit'
+                  value='Log In '
+                />
+                <p>
+                  Don't have an account?{' '}
+                  <a href='/' className='link'>
+                    Register
+                  </a>
+                </p>
+              </form>
+              <p>{message}</p>
+            </div>
+          </div>
+          <div className='div loginDiv3'></div>
+        </div>
+        <div className='footerContainer'>
+          {/* <div className='div footerDiv1'>PlaceHolders</div>
+          <div className='div footerDiv2'>PlaceHolders</div>
+          <div className='div footerDiv3'>PlaceHolders</div> */}
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+export default LoginTest;
