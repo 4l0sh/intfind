@@ -97,7 +97,7 @@ const Signup = () => {
             <hr />
             <p>
               Already have an account?{' '}
-              <a id='loginBtn' href='/login'>
+              <a id='loginBtn' href='/loginTest'>
                 Log In
               </a>
             </p>

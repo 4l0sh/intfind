@@ -155,6 +155,12 @@ const LoginTest = () => {
                     onClick={verifyCode}
                   />
                 </form>
+                <p>
+                  Log in using your Password{' '}
+                  <a href='/login' className='link'>
+                    Here
+                  </a>
+                </p>
               </div>
             </div>
           </div>
