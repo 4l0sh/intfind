@@ -63,6 +63,18 @@ const LoginTest = () => {
             );
         }
       });
+    fetch('http://localhost:4000/findRole', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ _id: userId }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log('role:', result.role);
+        localStorage.setItem('role', result.role);
+      });
   };
 
   const verifyCode = (e) => {

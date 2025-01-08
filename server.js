@@ -308,6 +308,26 @@ app.post('/findUser', (req, res) => {
       res.status(500).json({ message: 'Error finding user' });
     });
 });
+
+//find role
+app.post('/findRole', (req, res) => {
+  const collection = db.collection('roles');
+  collection
+    .findOne({ _id: req.body._id })
+    .then((response) => {
+      if (response) {
+        res.status(200).json(response);
+        console.log('role found', response.role);
+      } else {
+        res.status(404).json({ message: 'Role not found' });
+      }
+    })
+    .catch((err) => {
+      console.log('error finding role', err);
+      res.status(500).json({ message: 'Error finding role' });
+    });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
