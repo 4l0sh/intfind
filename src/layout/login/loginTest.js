@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import M from 'materialize-css';
 import emailjs from 'emailjs-com';
@@ -7,10 +7,13 @@ const LoginTest = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [generatedCode, setGeneratedCode] = useState(null);
 
   const generateCode = () => {
     return Math.floor(100000 + Math.random() * 900000);
   };
+
   const sendEmail = (e) => {
     e.preventDefault();
     fetch('http://localhost:4000/findUser', {
@@ -28,8 +31,9 @@ const LoginTest = () => {
             classes: 'red auth',
           });
         } else {
-          M.toast({ html: 'User  found', classes: 'blue auth' });
+          M.toast({ html: 'User found', classes: 'blue auth' });
           const code = generateCode();
+          setGeneratedCode(code);
 
           const templateParams = {
             to_email: email,
@@ -54,11 +58,21 @@ const LoginTest = () => {
             );
         }
       });
-
-    //   .then(() => {
-    //     navigate('/skills');
-    //   });
   };
+
+  const verifyCode = (e) => {
+    e.preventDefault();
+    console.log('generated code:', generatedCode);
+    console.log('verificationCode:', verificationCode);
+    if (parseInt(verificationCode) === generatedCode) {
+      console.log('code verified');
+      M.toast({ html: 'Code verified', classes: 'green auth' });
+    } else {
+      console.log('code not verified');
+      M.toast({ html: 'Code not verified', classes: 'red auth' });
+    }
+  };
+
   return (
     <Fragment>
       <div className='body'>
@@ -72,7 +86,7 @@ const LoginTest = () => {
             />
           </div>
           <div className='div headerDiv3'>
-            <div class='moon-solid icon'></div>
+            <div className='moon-solid icon'></div>
           </div>
         </div>
         <div className='loginContainer'>
@@ -106,6 +120,16 @@ const LoginTest = () => {
                 </p>
               </form>
               <p>{message}</p>
+              <div>
+                <form className='loginForm'>
+                  <input
+                    type='number'
+                    value={verificationCode}
+                    onChange={(e) => setVerificationCode(e.target.value)}
+                  />
+                  <input type='submit' value='Verify' onClick={verifyCode} />
+                </form>
+              </div>
             </div>
           </div>
           <div className='div loginDiv3'></div>
