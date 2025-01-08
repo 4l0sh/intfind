@@ -6,6 +6,7 @@ import Steps from './steps/steps';
 
 const Signup = () => {
   const [errorMessage, setErrorMessage] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState('');
   const navigate = useNavigate();
 
   const redirectToSkills = () => {
@@ -32,7 +33,7 @@ const Signup = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ selectedAvatar, username, email, password }),
     })
       .then((response) => response.json())
       .then((result) => {
@@ -71,6 +72,57 @@ const Signup = () => {
           <Steps currentStep={1} />
           <div className='title'>
             <h1>Sign Up</h1>
+          </div>
+          <div className='avatars'>
+            <div className='avatar1'>
+              {' '}
+              <img
+                className='img'
+                src='https://cdn.prod.website-files.com/6471ebc32c5012b32f0e45ba/66bb5eb7ad03ee7df2221a1f_JoDBRDfRn_QR6OTRO2HZTkDW9MHe84amL9rikLrejCI.png'
+                alt='avatar'
+                onClick={() =>
+                  setSelectedAvatar(
+                    'https://cdn.prod.website-files.com/6471ebc32c5012b32f0e45ba/66bb5eb7ad03ee7df2221a1f_JoDBRDfRn_QR6OTRO2HZTkDW9MHe84amL9rikLrejCI.png'
+                  )
+                }
+              ></img>
+            </div>
+            <div className='avatar2'>
+              <img
+                className='img'
+                src='https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100205.jpg'
+                alt='avatar'
+                onClick={() =>
+                  setSelectedAvatar(
+                    'https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100205.jpg'
+                  )
+                }
+              ></img>
+            </div>
+            <div className='avatar3'>
+              <img
+                className='img'
+                src='https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg'
+                alt='avatar'
+                onClick={() =>
+                  setSelectedAvatar(
+                    'https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg'
+                  )
+                }
+              ></img>
+            </div>
+            <div className='avatar4'>
+              <img
+                className='img'
+                src='https://img.freepik.com/free-photo/portrait-beautiful-girl-with-long-braids-blue-jacket_1142-43600.jpg'
+                alt='avatar'
+                onClick={() =>
+                  setSelectedAvatar(
+                    'https://img.freepik.com/free-photo/portrait-beautiful-girl-with-long-braids-blue-jacket_1142-43600.jpg'
+                  )
+                }
+              ></img>
+            </div>
           </div>
           <div className='signinForm'>
             <form id='signup' onSubmit={signUserUp}>
