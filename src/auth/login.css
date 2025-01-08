@@ -70,6 +70,7 @@
 
 .loginDiv2 {
   width: 40%;
+  height: 55vh;
   background: rgba(44, 62, 80, 0.8);
   border-radius: 15px;
   padding: 30px;
@@ -79,6 +80,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .login {
@@ -122,7 +124,7 @@ h1:hover {
   background-color: #2980b9;
   border: none;
   cursor: pointer;
-  width: 103%;
+  width: 109%;
   font-size: 1.1em;
   transition: background-color 0.3s ease;
 }
@@ -151,7 +153,15 @@ h1:hover {
 i {
   cursor: pointer;
 }
-
+.message {
+  color: red;
+  font-size: 1.2em;
+  margin-top: -25px;
+  margin-bottom: 25px;
+}
+.verification {
+  margin-top: -50px;
+}
 .footerContainer {
   background: rgba(52, 152, 219, 0.2);
   backdrop-filter: blur(12px);

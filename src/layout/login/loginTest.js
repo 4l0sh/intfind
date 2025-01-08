@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import M from 'materialize-css';
 import emailjs from 'emailjs-com';
-
+import '../../auth/login.css';
 const LoginTest = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -119,15 +119,21 @@ const LoginTest = () => {
                   </a>
                 </p>
               </form>
-              <p>{message}</p>
-              <div>
+              <p className='message'>{message}</p>
+              <div className='verification'>
                 <form className='loginForm'>
                   <input
+                    className='loginInput'
                     type='number'
                     value={verificationCode}
                     onChange={(e) => setVerificationCode(e.target.value)}
                   />
-                  <input type='submit' value='Verify' onClick={verifyCode} />
+                  <input
+                    className='loginInput '
+                    type='submit'
+                    value='Verify'
+                    onClick={verifyCode}
+                  />
                 </form>
               </div>
             </div>
