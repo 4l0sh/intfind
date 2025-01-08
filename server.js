@@ -281,26 +281,32 @@ app.post('/login', (req, res) => {
 app.post('/findUser', (req, res) => {
   const collection = db.collection('users');
   const email = req.body.email;
-  collection.findOne({ email: email }).then((result) => {
-    if (!result) {
-      return res.status(401).json({ message: 'User not found' });
-    }
-    const response = {
-      status: 200,
-      userId: result._id,
-      message: `User ${result.username} has been found`,
-      token: jwt.sign(
-        {
-          userId: result._id,
-          username: result.username,
-          iss: 'http://localhost:3000',
-        },
-        JWT_SECRET,
-        { expiresIn: '1h' }
-      ),
-    };
-    res.json(response);
-  });
+  collection
+    .findOne({ email: email })
+    .then((result) => {
+      if (!result) {
+        return res.status(401).json({ message: 'User not found' });
+      }
+      const response = {
+        status: 200,
+        userId: result._id,
+        message: `User ${result.username} has been found`,
+        token: jwt.sign(
+          {
+            userId: result._id,
+            username: result.username,
+            iss: 'http://localhost:3000',
+          },
+          JWT_SECRET,
+          { expiresIn: '1h' }
+        ),
+      };
+      res.json(response);
+    })
+    .catch((err) => {
+      console.log('error finding user', err);
+      res.status(500).json({ message: 'Error finding user' });
+    });
 });
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
