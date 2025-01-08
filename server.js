@@ -289,6 +289,15 @@ app.post('/findUser', (req, res) => {
       status: 200,
       userId: result._id,
       message: `User ${result.username} has been found`,
+      token: jwt.sign(
+        {
+          userId: result._id,
+          username: result.username,
+          iss: 'http://localhost:3000',
+        },
+        JWT_SECRET,
+        { expiresIn: '1h' }
+      ),
     };
     res.json(response);
   });

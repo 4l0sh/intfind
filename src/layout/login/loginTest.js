@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import M from 'materialize-css';
 import emailjs from 'emailjs-com';
 import '../../auth/login.css';
+import { set } from 'mongoose';
 const LoginTest = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [generatedCode, setGeneratedCode] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null);
 
   const generateCode = () => {
     return Math.floor(100000 + Math.random() * 900000);
@@ -34,6 +37,8 @@ const LoginTest = () => {
           M.toast({ html: 'User found', classes: 'blue auth' });
           const code = generateCode();
           setGeneratedCode(code);
+          setUserId(result.userId); // Set the userId state
+          setToken(result.token); // Set the token state
 
           const templateParams = {
             to_email: email,
@@ -67,6 +72,9 @@ const LoginTest = () => {
     if (parseInt(verificationCode) === generatedCode) {
       console.log('code verified');
       M.toast({ html: 'Code verified', classes: 'green auth' });
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
+      navigate('/skills');
     } else {
       console.log('code not verified');
       M.toast({ html: 'Code not verified', classes: 'red auth' });
