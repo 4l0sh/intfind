@@ -93,6 +93,12 @@ const Login = () => {
                   type='submit'
                   value='Log In '
                 />
+                <p>
+                  Don't have an account?{' '}
+                  <a href='/' className='link'>
+                    Register
+                  </a>
+                </p>
               </form>
             </div>
           </div>
