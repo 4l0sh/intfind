@@ -75,8 +75,9 @@ const Signup = () => {
             {errorMessage && <p className='error'>{errorMessage}</p>}
           </div>
           <div className='avatars'>
-            <div className='avatar1'>
-              {' '}
+            <div
+              className={`avatar1 ${selectedAvatar === 'https://cdn.prod.website-files.com/6471ebc32c5012b32f0e45ba/66bb5eb7ad03ee7df2221a1f_JoDBRDfRn_QR6OTRO2HZTkDW9MHe84amL9rikLrejCI.png' ? 'selected' : ''}`}
+            >
               <img
                 className='img'
                 src='https://cdn.prod.website-files.com/6471ebc32c5012b32f0e45ba/66bb5eb7ad03ee7df2221a1f_JoDBRDfRn_QR6OTRO2HZTkDW9MHe84amL9rikLrejCI.png'
@@ -85,12 +86,13 @@ const Signup = () => {
                   setSelectedAvatar(
                     'https://cdn.prod.website-files.com/6471ebc32c5012b32f0e45ba/66bb5eb7ad03ee7df2221a1f_JoDBRDfRn_QR6OTRO2HZTkDW9MHe84amL9rikLrejCI.png'
                   );
-                  console.log(selectedAvatar);
                 }}
               ></img>
-              <p>Ethan Carter</p>
+              <p>Joel Carter</p>
             </div>
-            <div className='avatar2'>
+            <div
+              className={`avatar2 ${selectedAvatar === 'https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100205.jpg' ? 'selected' : ''}`}
+            >
               <img
                 className='img'
                 src='https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100205.jpg'
@@ -99,12 +101,13 @@ const Signup = () => {
                   setSelectedAvatar(
                     'https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100205.jpg'
                   );
-                  console.log(selectedAvatar);
                 }}
               ></img>
-              <p> Olivia Rose</p>
+              <p>Olivia Rose</p>
             </div>
-            <div className='avatar3'>
+            <div
+              className={`avatar3 ${selectedAvatar === 'https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg' ? 'selected' : ''}`}
+            >
               <img
                 className='img'
                 src='https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg'
@@ -113,12 +116,13 @@ const Signup = () => {
                   setSelectedAvatar(
                     'https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg'
                   );
-                  console.log(selectedAvatar);
                 }}
               ></img>
-              <p>Loam Walker</p>
+              <p>Liam Walker</p>
             </div>
-            <div className='avatar4'>
+            <div
+              className={`avatar4 ${selectedAvatar === 'https://img.freepik.com/premium-photo/business-woman-3d-cartoon-avatar-portrait_839035-196331.jpg?w=360' ? 'selected' : ''}`}
+            >
               <img
                 className='img'
                 src='https://img.freepik.com/premium-photo/business-woman-3d-cartoon-avatar-portrait_839035-196331.jpg?w=360'
@@ -127,10 +131,9 @@ const Signup = () => {
                   setSelectedAvatar(
                     'https://img.freepik.com/premium-photo/business-woman-3d-cartoon-avatar-portrait_839035-196331.jpg?w=360'
                   );
-                  console.log(selectedAvatar);
                 }}
               ></img>
-              <p>Sphia Miller</p>
+              <p>Sophia Miller</p>
             </div>
           </div>
           <div className='signinForm'>
