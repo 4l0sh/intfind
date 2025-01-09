@@ -144,7 +144,7 @@ const LoginTest = () => {
                 <form className='loginForm'>
                   <input
                     className='loginInput'
-                    type='number'
+                    type='text'
                     value={verificationCode}
                     onChange={(e) => setVerificationCode(e.target.value)}
                   />

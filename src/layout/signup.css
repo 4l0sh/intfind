@@ -157,28 +157,6 @@
   margin-top: -10px;
 }
 
-.imginput {
-  display: none;
-}
-
-.custom-file-button {
-  width: 50%;
-  margin-top: 10px;
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: 0.3s ease;
-}
-
-.custom-file-button:hover {
-  background-color: #45a049;
-  transform: translateY(-3px);
-  transition: 0.3s ease;
-}
 hr {
   width: 100%;
 }
@@ -196,7 +174,6 @@ a:hover {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-top: -50px;
 }
 .avatar1,
 .avatar2,
