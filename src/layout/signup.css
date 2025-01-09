@@ -36,6 +36,7 @@
   border-radius: 20px;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
   gap: 40px;
+  overflow: auto;
 }
 
 .signinForm {
@@ -159,6 +160,7 @@
 
 hr {
   width: 100%;
+  margin: 1px;
 }
 a {
   color: #007bff;
@@ -212,4 +214,12 @@ a:hover {
 
 .img:active {
   transform: translateY(0);
+}
+.logintxt {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: -22px;
+  gap: 10px;
 }

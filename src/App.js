@@ -6,8 +6,8 @@ import Opleiding from './layout//opleiding/opleiding';
 import Experience from './layout/experience/experience';
 import Referenties from './layout/referenties/referenties';
 import Login from './auth/login';
-import SendEmail from './auth/SendEmail';
 import LoginTest from './layout/login/loginTest';
+import StudentCard from './student/studentCard';
 import './App.css';
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
           <Route exact path='/referenties' element={<Referenties />} />
           <Route exact path='/experience' element={<Experience />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/send-email' element={<SendEmail />} />
           <Route path='loginTest' element={<LoginTest />} />
+          <Route path='/studentCard' element={<StudentCard />} />
         </Routes>
       </Fragment>
     </Router>

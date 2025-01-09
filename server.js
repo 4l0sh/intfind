@@ -328,6 +328,33 @@ app.post('/findRole', (req, res) => {
     });
 });
 
+//get user
+const { ObjectId } = require('mongodb'); // Import ObjectId
+
+app.get('/users/:id', verifyToken, (req, res) => {
+  const collection = db.collection('users');
+  let userId;
+
+  try {
+    userId = new ObjectId(req.params.id);
+  } catch (error) {
+    return res.status(400).json({ message: 'Invalid user ID format' });
+  }
+
+  collection
+    .findOne({ _id: userId })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log('error getting user', err);
+      res.status(500).json({ message: 'Error getting user' });
+    });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

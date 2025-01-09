@@ -159,12 +159,14 @@ const Signup = () => {
               <input className='submit' type='submit' value='Sign Up' />
             </form>
             <hr />
-            <p>
-              Already have an account?{' '}
-              <a id='loginBtn' href='/loginTest'>
-                Log In
-              </a>
-            </p>
+            <div className='logintxt'>
+              <p>
+                Already have an account?{' '}
+                <a id='loginBtn' href='/loginTest'>
+                  Log In
+                </a>
+              </p>
+            </div>
           </div>
         </div>
         <div className='box3'>
