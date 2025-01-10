@@ -50,10 +50,96 @@
   display: flex;
   flex-direction: column;
   width: 30%;
-  border: 2px solid black;
+  border: 2px solid #4caf50;
   border-radius: 20px;
   margin: 10px;
   align-items: center;
   justify-content: flex-start;
-  box-shadow: 0px 0px 2px 3px #888888;
+  overflow: auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.studentCard2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.studentSoftSkills {
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #e8f5e9;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.studentSoftSkills h3 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  color: #2e7d32;
+}
+
+.studentSoftSkills ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+.studentSoftSkills li {
+  background-color: #ffffff;
+  border: 1px solid #c8e6c9;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.studentSoftSkills li:hover {
+  background-color: #f1f8e9;
+}
+
+.studentSoftSkills li::before {
+  content: '•';
+  color: #4caf50;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.skillsCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.studentProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8f5e9;
+  border-radius: 10px;
+  width: 60%;
+  height: 50%;
+  margin-bottom: 10px;
+}
+.errorMessage {
+  color: red;
+  font-size: large;
+  width: 55%;
+}
+.skilltxt {
+  color: red;
+  font-size: 20px;
+  margin: 0;
 }

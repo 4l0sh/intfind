@@ -13,7 +13,6 @@ app.use(express.json());
 //mongodb connection
 const mongoUri =
   'mongodb+srv://alisina:alisina123!@intfind.9hoqy.mongodb.net/?retryWrites=true&w=majority&appName=intfind';
-
 let db;
 MongoClient.connect(mongoUri)
   .then((client) => {
@@ -328,26 +327,50 @@ app.post('/findRole', (req, res) => {
     });
 });
 
-//get user
-const { ObjectId } = require('mongodb'); // Import ObjectId
-
-app.get('/users/:id', verifyToken, (req, res) => {
+//get user info from all collections
+const { ObjectId } = require('mongodb');
+app.get('/users/:id', (req, res) => {
   const collection = db.collection('users');
+  const collectionOpleiding = db.collection('opleiding');
+  const collectionRole = db.collection('roles');
+  const collectionSoftSkills = db.collection('skills');
+  const collectionTechSkills = db.collection('techskills');
+  const collectionwork = db.collection('experience');
   let userId;
-
+  // Validate and convert userId
   try {
     userId = new ObjectId(req.params.id);
   } catch (error) {
     return res.status(400).json({ message: 'Invalid user ID format' });
   }
-
-  collection
-    .findOne({ _id: userId })
-    .then((result) => {
-      if (!result) {
+  Promise.all([
+    collection.findOne({ _id: userId }),
+    collectionOpleiding.findOne({ _id: req.params.id }),
+    collectionRole.findOne({ _id: req.params.id }),
+    collectionSoftSkills.findOne({ _id: req.params.id }),
+    collectionTechSkills.findOne({ _id: req.params.id }),
+    collectionwork.findOne({ _id: req.params.id }),
+  ])
+    .then(([user, opleiding, role, softSkills, techSkills, workExperience]) => {
+      if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-      res.json(result);
+      res.json({
+        user,
+        opleiding,
+        role,
+        softSkills,
+        techSkills,
+        workExperience,
+      });
+      console.log(
+        user,
+        opleiding,
+        role,
+        softSkills,
+        techSkills,
+        workExperience
+      );
     })
     .catch((err) => {
       console.log('error getting user', err);
