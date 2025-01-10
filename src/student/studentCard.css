@@ -180,6 +180,8 @@
 }
 
 .errorMessage {
+  display: flex;
+  text-align: center;
   color: #d32f2f;
   font-size: 1.2em;
   width: 55%;

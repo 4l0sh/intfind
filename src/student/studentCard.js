@@ -21,6 +21,12 @@ const StudentCard = () => {
   const [referentieProfession, setRefentieProfession] = useState('');
   const [referentieText, setReferentieText] = useState('');
   const userId = localStorage.getItem('userId');
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('role');
+    window.location.href = '/loginTest';
+  };
   const getUserInfo = () => {
     fetch(`http://localhost:4000/users/${userId}`, {
       method: 'GET',
@@ -29,9 +35,16 @@ const StudentCard = () => {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error('Unauthorized');
+          }
+          throw new Error('Error getting user info');
+        }
+        return response.json();
+      })
       .then((data) => {
-        console.log(data);
         setStudentName(data.user.username);
         setStudentPhoto(data.user.selectedAvatar);
         setEmail(data.user.email);
@@ -45,7 +58,6 @@ const StudentCard = () => {
         setReferentiePersoon(data.referenties.persoon);
         setRefentieProfession(data.referenties.beroep);
         setReferentieText(data.referenties.referentieText);
-
         const processedWorkExperience = Array.isArray(data.workExperience)
           ? data.workExperience
           : Object.values(data.workExperience || {});
@@ -53,7 +65,11 @@ const StudentCard = () => {
         setWorkExperience(processedWorkExperience);
       })
       .catch((error) => {
-        setErrorMessage('Error getting user info Check if you are logged in');
+        if (error.message === 'Unauthorized') {
+          setErrorMessage('Unauthorized: no token. Please log in again');
+          return;
+        }
+        setErrorMessage('Error getting user info. Check if you are logged in');
         console.error('Error getting user info:', error);
       });
   };
@@ -64,7 +80,11 @@ const StudentCard = () => {
           <div className='studentCardsheader'>
             <div className='studentCardheader1'>1</div>
             <div className='studentCardheader2'>2</div>
-            <div className='studentCardheader3'>3</div>
+            <div className='studentCardheader3'>
+              <button onClick={logout} className='infobtn'>
+                Log Out
+              </button>
+            </div>
           </div>
           <div className='titleText'>
             <h1>Student Cards</h1>

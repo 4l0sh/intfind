@@ -329,7 +329,7 @@ app.post('/findRole', (req, res) => {
 
 //get user info from all collections
 const { ObjectId } = require('mongodb');
-app.get('/users/:id', (req, res) => {
+app.get('/users/:id', verifyToken, (req, res) => {
   const collection = db.collection('users');
   const collectionOpleiding = db.collection('opleiding');
   const collectionRole = db.collection('roles');
