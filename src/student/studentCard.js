@@ -177,15 +177,15 @@ const StudentCard = () => {
                   <ul>
                     <li>
                       <p>
-                        Refrence Person: <p>{referentiePersoon}</p>
+                        Refrence Person: <span>{referentiePersoon}</span>
                       </p>
                     </li>
                     <li>
-                      Profession: <p>{referentieProfession}</p>
+                      Profession: <span>{referentieProfession}</span>
                     </li>
                     <li>
                       <p>
-                        Refrence Text: <p>{referentieText}</p>
+                        Refrence Text: <span>{referentieText}</span>
                       </p>
                     </li>
                   </ul>
