@@ -5,9 +5,11 @@
   justify-content: flex-start;
   width: 100%;
   height: 100vh;
-
   box-sizing: border-box;
+  background-color: #f7f7f7;
+  padding: 20px;
 }
+
 .studentCardsheader {
   display: flex;
   flex-direction: row;
@@ -15,7 +17,9 @@
   justify-content: space-between;
   width: 100%;
   height: 10%;
+  margin-bottom: 20px;
 }
+
 .studentCardheader1,
 .studentCardheader2,
 .studentCardheader3 {
@@ -23,20 +27,39 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid black;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff;
   height: 90%;
   margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
+
 .studentCardheader2 {
   width: 40%;
 }
+
+.studentCardheader1:hover,
+.studentCardheader2:hover,
+.studentCardheader3:hover {
+  background-color: #eef1f5;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
 .titleText {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 10%;
+  font-size: 1.8em;
+  color: #33475b;
+  margin-bottom: 20px;
 }
+
 .studentCards {
   display: flex;
   flex-direction: row;
@@ -44,6 +67,7 @@
   width: 100%;
   height: 70%;
 }
+
 .studentCard1,
 .studentCard2,
 .studentCard3 {
@@ -51,37 +75,41 @@
   flex-direction: column;
   width: 30%;
   border: 2px solid #4caf50;
-  border-radius: 20px;
+  border-radius: 15px;
   margin: 10px;
+  background-color: #ffffff;
   align-items: center;
   justify-content: flex-start;
-  overflow: auto;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
-.studentCard2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+
+.studentCard1:hover,
+.studentCard2:hover,
+.studentCard3:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 .studentSoftSkills {
   width: 90%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  padding: 15px;
   background-color: #e8f5e9;
   border-radius: 10px;
-  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 10px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .studentSoftSkills h3 {
-  font-size: 1.2em;
-  margin-bottom: 5px;
+  font-size: 1.3em;
   color: #2e7d32;
+  margin-bottom: 10px;
 }
 
 .studentSoftSkills ul {
@@ -93,14 +121,14 @@
 .studentSoftSkills li {
   background-color: #ffffff;
   border: 1px solid #c8e6c9;
-  border-radius: 5px;
-  padding: 5px;
-  margin-bottom: 5px;
-  width: 100%;
-  text-align: left;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background-color 0.3s ease;
 }
 
 .studentSoftSkills li:hover {
@@ -111,7 +139,7 @@
   content: '•';
   color: #4caf50;
   font-weight: bold;
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 .skillsCard {
@@ -121,25 +149,94 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  gap: 10px;
 }
+
 .studentProfile {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: #e8f5e9;
   border-radius: 10px;
   width: 60%;
-  height: 50%;
+  height: 70%;
   margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .errorMessage {
-  color: red;
-  font-size: large;
+  color: #d32f2f;
+  font-size: 1.2em;
   width: 55%;
+  margin: 15px 0;
 }
+
 .skilltxt {
-  color: red;
-  font-size: 20px;
+  color: #d32f2f;
+  font-size: 1em;
   margin: 0;
+  transition:
+    color 0.3s ease,
+    font-size 0.3s ease;
+}
+
+.infobtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 60%;
+  margin: 10px;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.infobtn:hover {
+  background-color: #45a049;
+  transform: translateY(-3px);
+}
+.infobtn:active {
+  transform: translateY(0px);
+}
+.btntxt,
+.btnico {
+  transition: transform 0.2s ease;
+}
+
+.infobtn:hover .btntxt {
+  transform: translateY(-50px);
+}
+
+.infobtn:hover .btnico {
+  transform: translateY(-20px);
+}
+
+.btntxt {
+  font-size: 15px;
+}
+
+.btnico {
+  scale: 2;
+  transform: translateY(10px);
+}
+
+@media (max-width: 600px) {
+  .studentCard1,
+  .studentCard2,
+  .studentCard3 {
+    width: 100%;
+  }
+
+  .studentSoftSkills {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .studentProfile {
+    width: 100%;
+  }
 }

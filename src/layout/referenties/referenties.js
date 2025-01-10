@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import M from 'materialize-css';
 import './referenties.css';
@@ -9,6 +9,9 @@ function Referenties() {
 
   const redirectToExperience = () => {
     navigate('/experience');
+  };
+  const redirectToStudent = () => {
+    navigate('/studentCard');
   };
 
   const onSubmit = (e) => {
@@ -85,7 +88,13 @@ function Referenties() {
             </form>
           </div>
         </div>
-        <div className='box3'></div>
+        <div className='box3'>
+          <i
+            onClick={redirectToStudent}
+            className='fa-solid fa-arrow-right arrow-right'
+          ></i>
+          <p>See your cards!</p>
+        </div>
       </div>
     </div>
   );

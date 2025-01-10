@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { TbMobiledata } from 'react-icons/tb';
 import './studentCard.css';
 
 const StudentCard = () => {
@@ -15,6 +16,7 @@ const StudentCard = () => {
   const [finished, setFinished] = useState(false);
   const [softSkills, setSoftSkills] = useState([]);
   const [techSkills, setTechSkills] = useState([]);
+  const [workExperience, setWorkExperience] = useState(['', '', '', '', '']);
   const userId = localStorage.getItem('userId');
   const getUserInfo = () => {
     fetch(`http://localhost:4000/users/${userId}`, {
@@ -37,6 +39,7 @@ const StudentCard = () => {
         setFinished(data.opleiding.afgerond ? 'Yes' : 'No');
         setSoftSkills(data.softSkills);
         setTechSkills(data.techSkills);
+        setWorkExperience(data.workExperience);
       })
       .catch((error) => {
         setErrorMessage('Error getting user info Check if you are logged in');
@@ -76,7 +79,11 @@ const StudentCard = () => {
                 <div className='studentFinished'>Finished? : {finished}</div>
               </div>
               <div>
-                <button onClick={getUserInfo}>Get user info</button>
+                <button className='infobtn' onClick={getUserInfo}>
+                  {' '}
+                  <p className='btntxt'>Get user info</p>
+                  <TbMobiledata className='btnico' />{' '}
+                </button>
               </div>
             </div>
             <div className='studentCard2'>
@@ -143,6 +150,11 @@ const StudentCard = () => {
             <div className='studentCard3'>
               <h2>Work</h2>
               <div className='workExperience'>List of work experience</div>
+              {/* {workExperience.map((work, index) => (
+                <div key={index} className='work'>
+                  {work.value}
+                </div>
+              ))} */}
             </div>
           </div>
         </div>
