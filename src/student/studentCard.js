@@ -16,7 +16,10 @@ const StudentCard = () => {
   const [finished, setFinished] = useState(false);
   const [softSkills, setSoftSkills] = useState([]);
   const [techSkills, setTechSkills] = useState([]);
-  const [workExperience, setWorkExperience] = useState(['', '', '', '', '']);
+  const [workExperience, setWorkExperience] = useState(['']);
+  const [referentiePersoon, setReferentiePersoon] = useState('');
+  const [referentieProfession, setRefentieProfession] = useState('');
+  const [referentieText, setReferentieText] = useState('');
   const userId = localStorage.getItem('userId');
   const getUserInfo = () => {
     fetch(`http://localhost:4000/users/${userId}`, {
@@ -39,6 +42,10 @@ const StudentCard = () => {
         setFinished(data.opleiding.afgerond ? 'Yes' : 'No');
         setSoftSkills(data.softSkills);
         setTechSkills(data.techSkills);
+        setReferentiePersoon(data.referenties.persoon);
+        setRefentieProfession(data.referenties.beroep);
+        setReferentieText(data.referenties.referentieText);
+
         const processedWorkExperience = Array.isArray(data.workExperience)
           ? data.workExperience
           : Object.values(data.workExperience || {});
@@ -163,6 +170,27 @@ const StudentCard = () => {
               ) : (
                 <p>No work experience available</p>
               )}
+              <hr className='workhr' />
+              <div className='refrences'>
+                <h2>References</h2>
+                <div className='refrence1'>
+                  <ul>
+                    <li>
+                      <p>
+                        Refrence Person: <p>{referentiePersoon}</p>
+                      </p>
+                    </li>
+                    <li>
+                      Profession: <p>{referentieProfession}</p>
+                    </li>
+                    <li>
+                      <p>
+                        Refrence Text: <p>{referentieText}</p>
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

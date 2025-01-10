@@ -336,6 +336,7 @@ app.get('/users/:id', (req, res) => {
   const collectionSoftSkills = db.collection('skills');
   const collectionTechSkills = db.collection('techskills');
   const collectionwork = db.collection('experience');
+  const collectionReferenties = db.collection('referenties');
   let userId;
   // Validate and convert userId
   try {
@@ -350,28 +351,41 @@ app.get('/users/:id', (req, res) => {
     collectionSoftSkills.findOne({ _id: req.params.id }),
     collectionTechSkills.findOne({ _id: req.params.id }),
     collectionwork.findOne({ _id: req.params.id }),
+    collectionReferenties.findOne({ _id: req.params.id }),
   ])
-    .then(([user, opleiding, role, softSkills, techSkills, workExperience]) => {
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-      res.json({
+    .then(
+      ([
         user,
         opleiding,
         role,
         softSkills,
         techSkills,
         workExperience,
-      });
-      console.log(
-        user,
-        opleiding,
-        role,
-        softSkills,
-        techSkills,
-        workExperience
-      );
-    })
+        referenties,
+      ]) => {
+        if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({
+          user,
+          opleiding,
+          role,
+          softSkills,
+          techSkills,
+          workExperience,
+          referenties,
+        });
+        console.log(
+          user,
+          opleiding,
+          role,
+          softSkills,
+          techSkills,
+          workExperience,
+          referenties
+        );
+      }
+    )
     .catch((err) => {
       console.log('error getting user', err);
       res.status(500).json({ message: 'Error getting user' });
