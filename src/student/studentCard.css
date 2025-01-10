@@ -9,7 +9,6 @@
   background-color: #f7f7f7;
   padding: 20px;
 }
-
 .studentCardsheader {
   display: flex;
   flex-direction: row;
@@ -19,7 +18,6 @@
   height: 10%;
   margin-bottom: 20px;
 }
-
 .studentCardheader1,
 .studentCardheader2,
 .studentCardheader3 {
@@ -37,18 +35,15 @@
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 }
-
 .studentCardheader2 {
   width: 40%;
 }
-
 .studentCardheader1:hover,
 .studentCardheader2:hover,
 .studentCardheader3:hover {
   background-color: #eef1f5;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-
 .titleText {
   display: flex;
   align-items: center;
@@ -59,7 +54,6 @@
   color: #33475b;
   margin-bottom: 20px;
 }
-
 .studentCards {
   display: flex;
   flex-direction: row;
@@ -67,7 +61,6 @@
   width: 100%;
   height: 70%;
 }
-
 .studentCard1,
 .studentCard2,
 .studentCard3 {
@@ -86,14 +79,12 @@
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
-
 .studentCard1:hover,
 .studentCard2:hover,
 .studentCard3:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
 .studentSoftSkills {
   width: 90%;
   padding: 15px;
@@ -105,19 +96,16 @@
   flex-direction: column;
   align-items: center;
 }
-
 .studentSoftSkills h3 {
   font-size: 1.3em;
   color: #2e7d32;
   margin-bottom: 10px;
 }
-
 .studentSoftSkills ul {
   list-style-type: none;
   padding: 0;
   width: 100%;
 }
-
 .studentSoftSkills li {
   background-color: #ffffff;
   border: 1px solid #c8e6c9;
@@ -130,18 +118,15 @@
   align-items: center;
   transition: background-color 0.3s ease;
 }
-
 .studentSoftSkills li:hover {
   background-color: #f1f8e9;
 }
-
 .studentSoftSkills li::before {
   content: '•';
   color: #4caf50;
   font-weight: bold;
   margin-right: 8px;
 }
-
 .skillsCard {
   display: flex;
   flex-direction: row;
@@ -151,7 +136,6 @@
   height: 100%;
   gap: 10px;
 }
-
 .studentProfile {
   display: flex;
   flex-direction: column;
@@ -164,14 +148,12 @@
   margin-bottom: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .errorMessage {
   color: #d32f2f;
   font-size: 1.2em;
   width: 55%;
   margin: 15px 0;
 }
-
 .skilltxt {
   color: #d32f2f;
   font-size: 1em;
@@ -180,7 +162,6 @@
     color 0.3s ease,
     font-size 0.3s ease;
 }
-
 .infobtn {
   background-color: #4caf50;
   color: white;
@@ -193,8 +174,8 @@
   transition:
     background-color 0.2s ease,
     transform 0.2s ease;
+  overflow: hidden;
 }
-
 .infobtn:hover {
   background-color: #45a049;
   transform: translateY(-3px);
@@ -206,24 +187,19 @@
 .btnico {
   transition: transform 0.2s ease;
 }
-
 .infobtn:hover .btntxt {
   transform: translateY(-50px);
 }
-
 .infobtn:hover .btnico {
   transform: translateY(-20px);
 }
-
 .btntxt {
   font-size: 15px;
 }
-
 .btnico {
   scale: 2;
   transform: translateY(10px);
 }
-
 @media (max-width: 600px) {
   .studentCard1,
   .studentCard2,

@@ -39,7 +39,11 @@ const StudentCard = () => {
         setFinished(data.opleiding.afgerond ? 'Yes' : 'No');
         setSoftSkills(data.softSkills);
         setTechSkills(data.techSkills);
-        setWorkExperience(data.workExperience);
+        const processedWorkExperience = Array.isArray(data.workExperience)
+          ? data.workExperience
+          : Object.values(data.workExperience || {});
+
+        setWorkExperience(processedWorkExperience);
       })
       .catch((error) => {
         setErrorMessage('Error getting user info Check if you are logged in');
@@ -150,11 +154,15 @@ const StudentCard = () => {
             <div className='studentCard3'>
               <h2>Work</h2>
               <div className='workExperience'>List of work experience</div>
-              {/* {workExperience.map((work, index) => (
-                <div key={index} className='work'>
-                  {work.value}
-                </div>
-              ))} */}
+              {Array.isArray(workExperience) && workExperience.length > 0 ? (
+                workExperience.map((work, index) => (
+                  <div key={work.id || index} className='work'>
+                    {work.value}
+                  </div>
+                ))
+              ) : (
+                <p>No work experience available</p>
+              )}
             </div>
           </div>
         </div>
