@@ -248,28 +248,41 @@ app.post('/referenties', verifyToken, (req, res) => {
 //login user
 app.post('/login', (req, res) => {
   const collection = db.collection('users');
+  const roleCollection = db.collection('roles');
+
   collection
     .findOne({ email: req.body.email, password: req.body.password })
     .then((result) => {
       if (!result) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-      const token = jwt.sign(
-        {
-          userId: result._id,
-          username: result.username,
-          iss: 'http://localhost:3000',
-        },
-        JWT_SECRET,
-        { expiresIn: '1h' }
-      );
-      const response = {
-        status: 200,
-        userId: result._id,
-        message: `User ${result.username} has been logged in successfully`,
-        token: token,
-      };
-      res.json(response);
+      const userIdString = result._id.toString();
+
+      return roleCollection
+        .findOne({ _id: userIdString })
+        .then((roleResult) => {
+          const token = jwt.sign(
+            {
+              userId: result._id,
+              username: result.username,
+              role: roleResult ? roleResult.role : null, // Include role in the token if found
+              iss: 'http://localhost:3000',
+            },
+            JWT_SECRET,
+            { expiresIn: '1h' }
+          );
+
+          const response = {
+            status: 200,
+            userId: result._id,
+            username: result.username,
+            role: roleResult ? roleResult.role : 'No role found', // Respond with the role or a default message
+            message: `User ${result.username} has been logged in successfully`,
+            token: token,
+          };
+
+          res.json(response);
+        });
     })
     .catch((err) => {
       console.log('error logging in', err);
