@@ -8,7 +8,7 @@
   box-sizing: border-box;
   background: linear-gradient(45deg, #1c1c1c, #3a3a3a, #121212, #0a0a0a);
   background-size: 400% 400%;
-  animation: gradientAnimation 4s ease infinite;
+  animation: gradientAnimation 10s ease infinite;
   padding: 20px;
 }
 
@@ -110,7 +110,8 @@
 }
 
 .studentSoftSkills {
-  width: 90%;
+  min-width: 40%;
+  width: auto;
   padding: 15px;
   background-color: #e8f5ff;
   border-radius: 10px;
@@ -176,7 +177,8 @@
   text-align: center;
   background-color: #e8f5ff;
   border-radius: 10px;
-  width: 60%;
+  min-width: 50%;
+  width: auto;
   height: 70%;
   margin-bottom: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -234,7 +236,7 @@
 }
 
 .infobtn:hover .btnico {
-  transform: translateY(-20px);
+  transform: translateY(-17px);
 }
 
 .btntxt {
@@ -256,6 +258,9 @@
 .workhr {
   width: 50%;
   margin-top: 20px;
+}
+.roletxt {
+  margin-left: 10px;
 }
 
 @media (max-width: 600px) {

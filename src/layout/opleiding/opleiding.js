@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './opleiding.css';
+import M from 'materialize-css';
 import Steps from '../steps/steps';
 
 const Opleiding = () => {
@@ -37,6 +38,7 @@ const Opleiding = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log('added opleiding', result);
+        M.toast({ html: 'Opleiding added', classes: 'green' });
       })
       .catch((error) => {
         console.log('error adding opleiding', error);

@@ -8,6 +8,7 @@ import Referenties from './layout/referenties/referenties';
 import Login from './auth/login';
 import LoginTest from './layout/login/loginTest';
 import StudentCard from './student/studentCard';
+import EditUser from './layout/manageUsers/editUser';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='loginTest' element={<LoginTest />} />
           <Route path='/studentCard' element={<StudentCard />} />
+          <Route path='/editUser' element={<EditUser />} />
         </Routes>
       </Fragment>
     </Router>

@@ -1,0 +1,71 @@
+.editUserContainer {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: linear-gradient(45deg, #1c1c1c, #3a3a3a, #121212, #0a0a0a);
+  background-size: 400% 400%;
+  animation: backgroundAnimation 10s ease infinite;
+  box-sizing: border-box;
+}
+.editHeaderContainer {
+  display: flex;
+  width: 100%;
+  height: 10vh;
+  box-sizing: border-box;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #a1c4fd;
+}
+.editCard {
+  display: flex;
+  width: 70%;
+  height: 90%;
+  border: 2px solid red;
+  margin-top: 10px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: #1c1c1c;
+  border-radius: 20px;
+}
+.searchBar {
+  border: 2px solid #a1c4fd;
+  border-radius: 20px;
+  margin: 20px;
+  width: 90%;
+  height: 10%;
+  background-color: #1c1c1c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 20px;
+}
+.usersList {
+  border: 2px solid #a1c4fd;
+  display: flex;
+  width: 90%;
+  min-height: 50%;
+  border-radius: 20px;
+  height: auto;
+  padding: 20px;
+}
+@keyframes backgroundAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

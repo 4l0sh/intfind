@@ -20,6 +20,8 @@ const StudentCard = () => {
   const [referentiePersoon, setReferentiePersoon] = useState('');
   const [referentieProfession, setRefentieProfession] = useState('');
   const [referentieText, setReferentieText] = useState('');
+  const [role, setRole] = useState('');
+
   const userId = localStorage.getItem('userId');
   const logout = () => {
     localStorage.removeItem('token');
@@ -58,6 +60,8 @@ const StudentCard = () => {
         setReferentiePersoon(data.referenties.persoon);
         setRefentieProfession(data.referenties.beroep);
         setReferentieText(data.referenties.referentieText);
+        setRole(data.role.role);
+
         const processedWorkExperience = Array.isArray(data.workExperience)
           ? data.workExperience
           : Object.values(data.workExperience || {});
@@ -78,7 +82,10 @@ const StudentCard = () => {
       <body>
         <div className='SCmainContainer'>
           <div className='studentCardsheader'>
-            <div className='studentCardheader1'>1</div>
+            <div className='studentCardheader1'>
+              <p>this user is a </p>
+              <span className='roletxt'> {role.toUpperCase()}</span>
+            </div>
             <div className='studentCardheader2'>2</div>
             <div className='studentCardheader3'>
               <button onClick={logout} className='infobtn'>

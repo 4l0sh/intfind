@@ -1,5 +1,5 @@
 .body {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
+  background: linear-gradient(135deg, #2c3e50, #3e566e);
   height: 100vh;
   overflow: hidden;
   font-family: 'Arial', sans-serif;
@@ -8,7 +8,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  animation: gradientAnimation 10s ease infinite;
+  background-size: 400% 400%;
+  animation: gradientAnimation 8s ease infinite;
 }
 #logo {
   width: 15%;
@@ -103,7 +104,7 @@ h1:hover {
 }
 
 .loginInput {
-  width: 100%;
+  width: 97%;
   padding: 12px;
   margin: 10px 0;
   border: none;
@@ -124,7 +125,8 @@ h1:hover {
   background-color: #2980b9;
   border: none;
   cursor: pointer;
-  width: 109%;
+  min-width: 100%;
+  width: auto;
   font-size: 1.1em;
   transition: background-color 0.3s ease;
 }
@@ -192,18 +194,12 @@ i {
 
 @keyframes gradientAnimation {
   0% {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
-  }
-  25% {
-    background: linear-gradient(135deg, #34495e, #2c3e50);
+    background-position: 0% 50%;
   }
   50% {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
-  }
-  75% {
-    background: linear-gradient(135deg, #34495e, #2c3e50);
+    background-position: 100% 50%;
   }
   100% {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
+    background-position: 0% 50%;
   }
 }
