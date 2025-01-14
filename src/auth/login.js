@@ -31,6 +31,8 @@ const Login = () => {
           navigate('/');
         } else if (result.role === 'admin') {
           navigate('/studentCard');
+        } else {
+          M.toast({ html: 'Invalid email or password', classes: 'red auth' });
         }
       })
       .catch((err) => {
