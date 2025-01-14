@@ -34,7 +34,7 @@ const LoginTest = () => {
             classes: 'red auth',
           });
         } else {
-          M.toast({ html: 'User found', classes: 'blue auth' });
+          M.toast({ html: 'User found', classes: 'blue auth found' });
           const code = generateCode();
           setGeneratedCode(code);
           setUserId(result.userId); // Set the userId state
@@ -125,7 +125,6 @@ const LoginTest = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-
                 <input
                   onClick={sendEmail}
                   className='loginInput'

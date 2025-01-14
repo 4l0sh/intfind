@@ -316,7 +316,6 @@ app.post('/findRole', (req, res) => {
     .then((response) => {
       if (response) {
         res.status(200).json(response);
-        console.log('role found', response.role);
       } else {
         res.status(404).json({ message: 'Role not found' });
       }

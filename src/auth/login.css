@@ -149,7 +149,15 @@ h1:hover {
   margin-top: 140px;
   transform: translateX(-50%);
 }
-
+.found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 110px;
+  width: 10%;
+  background-color: aquamarine;
+  border-radius: 20px;
+}
 i {
   cursor: pointer;
 }

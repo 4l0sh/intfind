@@ -99,7 +99,9 @@
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
-
+.studentCard2 {
+  width: 50%;
+}
 .studentCard1:hover,
 .studentCard2:hover,
 .studentCard3:hover {
@@ -138,6 +140,7 @@
   padding: 8px 10px;
   margin-bottom: 8px;
   width: 90%;
+  max-width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
