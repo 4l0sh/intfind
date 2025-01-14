@@ -265,7 +265,7 @@ app.post('/login', (req, res) => {
             {
               userId: result._id,
               username: result.username,
-              role: roleResult ? roleResult.role : null, // Include role in the token if found
+              role: roleResult ? roleResult.role : null,
               iss: 'http://localhost:3000',
             },
             JWT_SECRET,
@@ -276,7 +276,7 @@ app.post('/login', (req, res) => {
             status: 200,
             userId: result._id,
             username: result.username,
-            role: roleResult ? roleResult.role : 'No role found', // Respond with the role or a default message
+            role: roleResult ? roleResult.role : 'No role found',
             message: `User ${result.username} has been logged in successfully`,
             token: token,
           };
@@ -292,6 +292,7 @@ app.post('/login', (req, res) => {
 
 app.post('/findUser', (req, res) => {
   const collection = db.collection('users');
+  const roleCollection = db.collection('roles');
   const email = req.body.email;
   collection
     .findOne({ email: email })
@@ -299,21 +300,29 @@ app.post('/findUser', (req, res) => {
       if (!result) {
         return res.status(401).json({ message: 'User not found' });
       }
-      const response = {
-        status: 200,
-        userId: result._id,
-        message: `User ${result.username} has been found`,
-        token: jwt.sign(
-          {
+      const userIdString = result._id.toString();
+      return roleCollection
+        .findOne({ _id: userIdString })
+        .then((roleResult) => {
+          const response = {
+            status: 200,
             userId: result._id,
-            username: result.username,
-            iss: 'http://localhost:3000',
-          },
-          JWT_SECRET,
-          { expiresIn: '1h' }
-        ),
-      };
-      res.json(response);
+            message: `User ${result.username} has been found`,
+            role: roleResult ? roleResult.role : 'No role found',
+            token: jwt.sign(
+              {
+                userId: result._id,
+                username: result.username,
+                role: roleResult ? roleResult.role : 'No role found',
+                iss: 'http://localhost:3000',
+              },
+              JWT_SECRET,
+              { expiresIn: '1h' }
+            ),
+          };
+          res.json(response);
+          console.log('user found: ', response);
+        });
     })
     .catch((err) => {
       console.log('error finding user', err);

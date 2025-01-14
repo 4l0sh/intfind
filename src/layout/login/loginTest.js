@@ -12,6 +12,7 @@ const LoginTest = () => {
   const [generatedCode, setGeneratedCode] = useState(null);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
+  const [role, setRole] = useState('');
 
   const generateCode = () => {
     return Math.floor(100000 + Math.random() * 900000);
@@ -39,6 +40,7 @@ const LoginTest = () => {
           setGeneratedCode(code);
           setUserId(result.userId); // Set the userId state
           setToken(result.token); // Set the token state
+          setRole(result.role); // Set the role state
 
           const templateParams = {
             to_email: email,
@@ -63,18 +65,19 @@ const LoginTest = () => {
             );
         }
       });
-    fetch('http://localhost:4000/findRole', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ _id: userId }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log('role:', result.role);
-        localStorage.setItem('role', result.role);
-      });
+    // fetch('http://localhost:4000/findRole', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ _id: userId }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     console.log('role:', result.role);
+    //     setRole(result.role);
+    //     localStorage.setItem('role', result.role);
+    //   });
   };
 
   const verifyCode = (e) => {
@@ -86,7 +89,11 @@ const LoginTest = () => {
       M.toast({ html: 'Code verified', classes: 'green auth' });
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
-      navigate('/skills');
+      if (role === 'student') {
+        navigate('/');
+      } else if (role === 'admin') {
+        navigate('/studentCard');
+      }
     } else {
       console.log('code not verified');
       M.toast({ html: 'Code not verified', classes: 'red auth' });
@@ -129,7 +136,7 @@ const LoginTest = () => {
                   onClick={sendEmail}
                   className='loginInput'
                   type='submit'
-                  value='Log In '
+                  value='Send Code'
                 />
                 <p>
                   Don't have an account?{' '}
