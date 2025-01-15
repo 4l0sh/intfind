@@ -22,15 +22,10 @@ const Login = () => {
         const userId = result.userId;
         localStorage.setItem('token', result.token);
         localStorage.setItem('userId', userId);
-        // if (userId) {
-        //   navigate('/');
-        // } else {
-        //   M.toast({ html: 'Invalid email or password', classes: 'red auth' });
-        // }
         if (result.role === 'student') {
           navigate('/');
         } else if (result.role === 'admin') {
-          navigate('/studentCard');
+          navigate('/editUser');
         } else {
           M.toast({ html: 'Invalid email or password', classes: 'red auth' });
         }

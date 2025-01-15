@@ -33,7 +33,7 @@ const Signup = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ selectedAvatar, username, email, password }),
+      body: JSON.stringify({ selectedAvatar, username, email, password, role }),
     })
       .then((response) => response.json())
       .then((result) => {
@@ -45,20 +45,6 @@ const Signup = () => {
           localStorage.setItem('userId', result.userId);
           localStorage.setItem('token', result.token);
           navigate('/skills');
-
-          // Add role after user is successfully added
-          fetch('http://localhost:4000/users/roles', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ role, userId: result.userId }),
-          })
-            .then((response) => response.json())
-            .then((result) => {
-              console.log('role added', result);
-            })
-            .catch((err) => console.log('error adding role', err));
         }
       })
       .catch((err) => console.log('error adding user', err));

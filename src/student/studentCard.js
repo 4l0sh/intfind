@@ -60,7 +60,7 @@ const StudentCard = () => {
         setReferentiePersoon(data.referenties.persoon);
         setRefentieProfession(data.referenties.beroep);
         setReferentieText(data.referenties.referentieText);
-        setRole(data.role.role);
+        setRole(data.user.role);
 
         const processedWorkExperience = Array.isArray(data.workExperience)
           ? data.workExperience

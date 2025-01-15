@@ -79,26 +79,6 @@ app.post('/users/signup', (req, res) => {
   });
 });
 
-//insert role
-app.post('/users/roles', (req, res) => {
-  const collection = db.collection('roles');
-  const role = req.body.role;
-  const userId = req.body.userId;
-
-  collection
-    .insertOne({ _id: userId, role: role })
-    .then((response) => {
-      res.status(200).json({ message: 'Role has been inserted successfully' });
-    })
-    .then((result) => {
-      console.log('role added');
-    })
-    .catch((err) => {
-      console.log('error adding role', err);
-      res.status(500).json({ message: 'Error adding role' });
-    });
-});
-
 //insert skills
 app.post('/skills', (req, res) => {
   const collection = db.collection('skills');
@@ -248,7 +228,6 @@ app.post('/referenties', verifyToken, (req, res) => {
 //login user
 app.post('/login', (req, res) => {
   const collection = db.collection('users');
-  const roleCollection = db.collection('roles');
 
   collection
     .findOne({ email: req.body.email, password: req.body.password })
@@ -256,33 +235,28 @@ app.post('/login', (req, res) => {
       if (!result) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-      const userIdString = result._id.toString();
 
-      return roleCollection
-        .findOne({ _id: userIdString })
-        .then((roleResult) => {
-          const token = jwt.sign(
-            {
-              userId: result._id,
-              username: result.username,
-              role: roleResult ? roleResult.role : null,
-              iss: 'http://localhost:3000',
-            },
-            JWT_SECRET,
-            { expiresIn: '1h' }
-          );
+      const token = jwt.sign(
+        {
+          userId: result._id,
+          username: result.username,
+          role: result.role,
+          iss: 'http://localhost:3000',
+        },
+        JWT_SECRET,
+        { expiresIn: '1h' }
+      );
 
-          const response = {
-            status: 200,
-            userId: result._id,
-            username: result.username,
-            role: roleResult ? roleResult.role : 'No role found',
-            message: `User ${result.username} has been logged in successfully`,
-            token: token,
-          };
+      const response = {
+        status: 200,
+        userId: result._id,
+        username: result.username,
+        role: result.role,
+        message: `User ${result.username} has been logged in successfully`,
+        token: token,
+      };
 
-          res.json(response);
-        });
+      res.json(response);
     })
     .catch((err) => {
       console.log('error logging in', err);
@@ -293,59 +267,37 @@ app.post('/login', (req, res) => {
 //find user
 app.post('/findUser', (req, res) => {
   const collection = db.collection('users');
-  const roleCollection = db.collection('roles');
   const email = req.body.email;
+
   collection
     .findOne({ email: email })
     .then((result) => {
       if (!result) {
         return res.status(401).json({ message: 'User not found' });
       }
-      const userIdString = result._id.toString();
-      return roleCollection
-        .findOne({ _id: userIdString })
-        .then((roleResult) => {
-          const response = {
-            status: 200,
+
+      const response = {
+        status: 200,
+        userId: result._id,
+        message: `User ${result.username} has been found`,
+        role: result.role,
+        token: jwt.sign(
+          {
             userId: result._id,
-            message: `User ${result.username} has been found`,
-            role: roleResult ? roleResult.role : 'No role found',
-            token: jwt.sign(
-              {
-                userId: result._id,
-                username: result.username,
-                role: roleResult ? roleResult.role : 'No role found',
-                iss: 'http://localhost:3000',
-              },
-              JWT_SECRET,
-              { expiresIn: '1h' }
-            ),
-          };
-          res.json(response);
-          console.log('user found: ', response);
-        });
+            username: result.username,
+            role: result.role,
+            iss: 'http://localhost:3000',
+          },
+          JWT_SECRET,
+          { expiresIn: '1h' }
+        ),
+      };
+      res.json(response);
+      console.log('user found: ', response);
     })
     .catch((err) => {
       console.log('error finding user', err);
       res.status(500).json({ message: 'Error finding user' });
-    });
-});
-
-//find role
-app.post('/findRole', (req, res) => {
-  const collection = db.collection('roles');
-  collection
-    .findOne({ _id: req.body._id })
-    .then((response) => {
-      if (response) {
-        res.status(200).json(response);
-      } else {
-        res.status(404).json({ message: 'Role not found' });
-      }
-    })
-    .catch((err) => {
-      console.log('error finding role', err);
-      res.status(500).json({ message: 'Error finding role' });
     });
 });
 
@@ -354,7 +306,6 @@ const { ObjectId } = require('mongodb');
 app.get('/users/:id', verifyToken, (req, res) => {
   const collection = db.collection('users');
   const collectionOpleiding = db.collection('opleiding');
-  const collectionRole = db.collection('roles');
   const collectionSoftSkills = db.collection('skills');
   const collectionTechSkills = db.collection('techskills');
   const collectionwork = db.collection('experience');
@@ -369,7 +320,6 @@ app.get('/users/:id', verifyToken, (req, res) => {
   Promise.all([
     collection.findOne({ _id: userId }),
     collectionOpleiding.findOne({ _id: req.params.id }),
-    collectionRole.findOne({ _id: req.params.id }),
     collectionSoftSkills.findOne({ _id: req.params.id }),
     collectionTechSkills.findOne({ _id: req.params.id }),
     collectionwork.findOne({ _id: req.params.id }),
@@ -379,7 +329,6 @@ app.get('/users/:id', verifyToken, (req, res) => {
       ([
         user,
         opleiding,
-        role,
         softSkills,
         techSkills,
         workExperience,
@@ -391,7 +340,6 @@ app.get('/users/:id', verifyToken, (req, res) => {
         res.json({
           user,
           opleiding,
-          role,
           softSkills,
           techSkills,
           workExperience,
@@ -400,7 +348,6 @@ app.get('/users/:id', verifyToken, (req, res) => {
         console.log(
           user,
           opleiding,
-          role,
           softSkills,
           techSkills,
           workExperience,
@@ -445,7 +392,7 @@ app.delete('/users/:id', (req, res) => {
       })
       .catch((err) => {
         console.log('error deleting user', err);
-        console.log('res object:', res); // Log the res object
+        console.log('res object:', res);
         if (res) {
           res.status(500).json({ message: 'Error deleting user' });
         } else {
@@ -455,6 +402,27 @@ app.delete('/users/:id', (req, res) => {
   }
 });
 
+//update user
+app.put('/users/:id', (req, res) => {
+  const collection = db.collection('users');
+  const role = req.headers['role'];
+  if (!role || role !== 'admin') {
+    return res.status(401).json({ message: 'Unauthorized: not an admin' });
+  } else {
+    collection
+      .updateOne(
+        { _id: new ObjectId(req.params.id) },
+        { $set: { role: req.body.role } }
+      )
+      .then((result) => {
+        res.status(200).json({ message: 'User updated successfully' });
+      })
+      .catch((err) => {
+        console.log('error updating user', err);
+        res.status(500).json({ message: 'Error updating user' });
+      });
+  }
+});
 //port
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

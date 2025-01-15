@@ -13,8 +13,6 @@ const StudentCard = ({ user }) => {
     setIsEditing(false);
   };
   const deleteUser = () => {
-    const role = localStorage.getItem('role');
-    // Add delete logic here
     fetch(`http://localhost:4000/users/${_id}`, {
       method: 'DELETE',
       headers: {
@@ -31,6 +29,32 @@ const StudentCard = ({ user }) => {
       })
       .catch((error) => {
         console.error('Error:', error);
+      });
+  };
+
+  const updateHandler = (e) => {
+    e.preventDefault();
+    const newRole = document.getElementById('role').value;
+
+    fetch(`http://localhost:4000/users/${_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        role: role,
+      },
+      body: JSON.stringify({ newRole }),
+    })
+      .then((response) => {
+        if (response.status === 401) {
+          M.toast({ html: 'Unauthorized You are no admin', classes: 'red' });
+        } else if (response.status === 200) {
+          M.toast({ html: 'User Role updated successfully', classes: 'green' });
+        }
+        console.log(response);
+      })
+
+      .catch((err) => {
+        console.log('Error updating user Role', err);
       });
   };
 
@@ -54,6 +78,7 @@ const StudentCard = ({ user }) => {
           <div className='editForm'>
             {' '}
             <form className='editUserForm'>
+              <label htmlFor='role'>This user is a : {role}</label>
               <select className='select' name='role' id='role'>
                 <option value='' disabled>
                   Select Role
@@ -61,6 +86,9 @@ const StudentCard = ({ user }) => {
                 <option value='student'>Student</option>
                 <option value='admin'>Admin</option>
               </select>
+              <button type='submit' onClick={updateHandler}>
+                Update
+              </button>
               <button type='button' onClick={closeHandler}>
                 Close
               </button>
