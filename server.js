@@ -430,6 +430,31 @@ app.get('/users', (req, res) => {
     });
 });
 
+//delete user
+app.delete('/users/:id', (req, res) => {
+  const collection = db.collection('users');
+  const role = req.headers['role'];
+
+  if (role !== 'admin') {
+    return res.status(401).json({ message: 'Unauthorized: not an admin' });
+  } else {
+    collection
+      .deleteOne({ _id: new ObjectId(req.params.id) })
+      .then((result) => {
+        res.status(200).json({ message: 'User deleted successfully' });
+      })
+      .catch((err) => {
+        console.log('error deleting user', err);
+        console.log('res object:', res); // Log the res object
+        if (res) {
+          res.status(500).json({ message: 'Error deleting user' });
+        } else {
+          console.log('res is undefined');
+        }
+      });
+  }
+});
+
 //port
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
