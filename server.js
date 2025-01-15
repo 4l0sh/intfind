@@ -290,6 +290,7 @@ app.post('/login', (req, res) => {
     });
 });
 
+//find user
 app.post('/findUser', (req, res) => {
   const collection = db.collection('users');
   const roleCollection = db.collection('roles');
@@ -413,6 +414,23 @@ app.get('/users/:id', verifyToken, (req, res) => {
     });
 });
 
+//list users
+app.get('/users', (req, res) => {
+  const collection = db.collection('users');
+  collection
+    .find({})
+    .toArray()
+    .then((users) => {
+      res.json(users);
+      res.status(200);
+    })
+    .catch((err) => {
+      console.log('error fetching users', err);
+      res.status(500).json({ message: 'Error fetching users' });
+    });
+});
+
+//port
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
