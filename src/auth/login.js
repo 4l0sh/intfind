@@ -20,6 +20,7 @@ const Login = () => {
       .then((response) => response.json())
       .then((result) => {
         const userId = result.userId;
+        sessionStorage.setItem('jwt', result.token);
         localStorage.setItem('token', result.token);
         localStorage.setItem('userId', userId);
         if (result.role === 'student') {

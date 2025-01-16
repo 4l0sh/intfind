@@ -38,9 +38,9 @@ const LoginTest = () => {
           M.toast({ html: 'User found', classes: 'blue auth found' });
           const code = generateCode();
           setGeneratedCode(code);
-          setUserId(result.userId); // Set the userId state
-          setToken(result.token); // Set the token state
-          setRole(result.role); // Set the role state
+          setUserId(result.userId);
+          setToken(result.token);
+          setRole(result.role);
 
           const templateParams = {
             to_email: email,
@@ -65,19 +65,6 @@ const LoginTest = () => {
             );
         }
       });
-    // fetch('http://localhost:4000/findRole', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ _id: userId }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     console.log('role:', result.role);
-    //     setRole(result.role);
-    //     localStorage.setItem('role', result.role);
-    //   });
   };
 
   const verifyCode = (e) => {
@@ -87,7 +74,8 @@ const LoginTest = () => {
     if (parseInt(verificationCode) === generatedCode) {
       console.log('code verified');
       M.toast({ html: 'Code verified', classes: 'green auth' });
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('jwt', token);
+      // localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
       if (role === 'student') {
         navigate('/');

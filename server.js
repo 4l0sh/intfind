@@ -4,11 +4,13 @@ const MongoClient = require('mongodb').MongoClient;
 const app = express();
 const port = 4000;
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const JWT_SECRET = 'intfind';
 
 //middleware
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 //mongodb connection
 const mongoUri =
@@ -39,6 +41,26 @@ function verifyToken(req, res, next) {
     console.log('error verifying token', err);
     return res.status(401).json({ error: 'Unautorized: invalid token' });
   }
+}
+// Middleware to check if user is admin
+function checkAdminRole(req, res, next) {
+  const token = req.header('Authorization')?.replace('Bearer ', '');
+  if (!token) {
+    // return res.status(401).json({ message: 'Unauthorized: No token provided' });
+    return res.status(401).json({ message: req.cookies.jwt });
+  }
+
+  jwt.verify(token, 'intfind', (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    }
+
+    if (decoded.role !== 'admin') {
+      return res.status(401).json({ message: 'Unauthorized: not an admin' });
+    }
+
+    next();
+  });
 }
 
 //insert user
@@ -268,7 +290,6 @@ app.post('/login', (req, res) => {
 app.post('/findUser', (req, res) => {
   const collection = db.collection('users');
   const email = req.body.email;
-
   collection
     .findOne({ email: email })
     .then((result) => {
@@ -378,50 +399,55 @@ app.get('/users', (req, res) => {
 });
 
 //delete user
-app.delete('/users/:id', (req, res) => {
+app.delete('/users/:id', checkAdminRole, (req, res) => {
   const collection = db.collection('users');
-  const role = req.headers['role'];
-
-  if (role !== 'admin') {
-    return res.status(401).json({ message: 'Unauthorized: not an admin' });
-  } else {
-    collection
-      .deleteOne({ _id: new ObjectId(req.params.id) })
-      .then((result) => {
-        res.status(200).json({ message: 'User deleted successfully' });
-      })
-      .catch((err) => {
-        console.log('error deleting user', err);
-        console.log('res object:', res);
-        if (res) {
-          res.status(500).json({ message: 'Error deleting user' });
-        } else {
-          console.log('res is undefined');
-        }
-      });
-  }
+  collection
+    .deleteOne({ _id: new ObjectId(req.params.id) })
+    .then((result) => {
+      res.status(200).json({ message: 'User deleted successfully' });
+    })
+    .catch((err) => {
+      console.log('error deleting user', err);
+      console.log('res object:', res);
+      if (res) {
+        res.status(500).json({ message: 'Error deleting user' });
+      } else {
+        console.log('res is undefined');
+      }
+    });
 });
 
-//update user
-app.put('/users/:id', (req, res) => {
-  const collection = db.collection('users');
-  const role = req.headers['role'];
-  if (!role || role !== 'admin') {
-    return res.status(401).json({ message: 'Unauthorized: not an admin' });
-  } else {
-    collection
-      .updateOne(
-        { _id: new ObjectId(req.params.id) },
-        { $set: { role: req.body.role } }
-      )
-      .then((result) => {
-        res.status(200).json({ message: 'User updated successfully' });
-      })
-      .catch((err) => {
-        console.log('error updating user', err);
-        res.status(500).json({ message: 'Error updating user' });
-      });
+//test
+function testJwt(req, res, next) {
+  const token = req.header('Authorization')?.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: No token provided' });
   }
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    }
+    if (decoded.role !== 'admin') {
+      return res.status(401).json({ message: 'Unauthorized: not an admin' });
+    }
+    next();
+  });
+}
+//update user
+app.put('/users/:id', checkAdminRole, (req, res) => {
+  const collection = db.collection('users');
+  collection
+    .updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { role: req.body.role } }
+    )
+    .then((result) => {
+      res.status(200).json({ message: 'User updated successfully' });
+    })
+    .catch((err) => {
+      console.log('error updating user', err);
+      res.status(500).json({ message: 'Error updating user' });
+    });
 });
 //port
 app.listen(port, () => {

@@ -17,6 +17,7 @@ const StudentCard = ({ user }) => {
       method: 'DELETE',
       headers: {
         role: role,
+        Authorization: `Bearer ${sessionStorage.getItem('jwt')}`,
       },
     })
       .then((response) => {
@@ -35,14 +36,16 @@ const StudentCard = ({ user }) => {
   const updateHandler = (e) => {
     e.preventDefault();
     const newRole = document.getElementById('role').value;
+    const token = sessionStorage.getItem('jwt');
 
     fetch(`http://localhost:4000/users/${_id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         role: role,
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ newRole }),
+      body: JSON.stringify({ role: newRole }),
     })
       .then((response) => {
         if (response.status === 401) {
@@ -52,7 +55,6 @@ const StudentCard = ({ user }) => {
         }
         console.log(response);
       })
-
       .catch((err) => {
         console.log('Error updating user Role', err);
       });

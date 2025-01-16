@@ -42,8 +42,8 @@ const Signup = () => {
           M.toast({ html: 'User already exists', classes: 'red' });
         } else {
           console.log('user added', result);
+          sessionStorage.setItem('jwt', result.token);
           localStorage.setItem('userId', result.userId);
-          localStorage.setItem('token', result.token);
           navigate('/skills');
         }
       })

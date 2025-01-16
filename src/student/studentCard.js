@@ -25,6 +25,7 @@ const StudentCard = () => {
   const userId = localStorage.getItem('userId');
   const logout = () => {
     localStorage.removeItem('token');
+    sessionStorage.removeItem('jwt');
     localStorage.removeItem('userId');
     localStorage.removeItem('role');
     window.location.href = '/loginTest';
@@ -34,7 +35,7 @@ const StudentCard = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('jwt')}`,
       },
     })
       .then((response) => {
