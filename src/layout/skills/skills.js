@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import M from "materialize-css";
-import "./skills.css";
-import Steps from "../steps/steps";
+import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import M from 'materialize-css';
+import './skills.css';
+import Steps from '../steps/steps';
 
 const Skills = () => {
   const navigate = useNavigate();
@@ -28,11 +28,11 @@ const Skills = () => {
   const techvalue5Ref = useRef();
 
   const redirectToSignup = () => {
-    navigate("/");
+    navigate('/');
   };
 
   const redirectToOpleiding = () => {
-    navigate("/opleiding");
+    navigate('/opleiding');
   };
 
   const clicked = (e) => {
@@ -57,7 +57,7 @@ const Skills = () => {
     console.log(skill5, value5);
 
     // Send the data to the server
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem('userId');
     const skills = {
       skill1,
       value1,
@@ -70,20 +70,21 @@ const Skills = () => {
       skill5,
       value5,
     };
-    fetch("http://localhost:4000/skills", {
-      method: "POST",
+
+    fetch('http://localhost:4000/skills', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ userId, skills }),
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("skills added", result);
-        M.toast({ html: "Soft Skills added successfully", classes: "green" });
+        console.log('skills added', result);
+        M.toast({ html: 'Soft Skills added successfully', classes: 'green' });
       })
       .catch((error) => {
-        console.log("error adding skills", error);
+        console.log('error adding skills', error);
       });
   };
   //send tech skills to the server
@@ -116,7 +117,7 @@ const Skills = () => {
       techvalue5
     );
 
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem('userId');
     const techskills = {
       techskill1,
       techvalue1,
@@ -129,197 +130,197 @@ const Skills = () => {
       techskill5,
       techvalue5,
     };
-    fetch("http://localhost:4000/techskills", {
-      method: "Post",
+    fetch('http://localhost:4000/techskills', {
+      method: 'Post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ userId, techskills }),
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("tech skills added", result);
-        M.toast({ html: "Tech Skills added successfully", classes: "green" });
+        console.log('tech skills added', result);
+        M.toast({ html: 'Tech Skills added successfully', classes: 'green' });
       })
       .catch((error) => {
-        console.log("error adding tech skills", error);
+        console.log('error adding tech skills', error);
       });
   };
 
   return (
     <div>
-      <div className="container">
-        <div className="box1">
+      <div className='container'>
+        <div className='box1'>
           <i
             onClick={redirectToSignup}
-            className="fa-solid fa-arrow-left arrow-left"
+            className='fa-solid fa-arrow-left arrow-left'
           ></i>
           <p> Previous</p>
         </div>
-        <div className="box2">
+        <div className='box2'>
           <Steps currentStep={2} />
-          <div className="title">
+          <div className='title'>
             <h1>Skills</h1>
           </div>
-          <div className="skillsDiv">
-            <div className="softSkills">
+          <div className='skillsDiv'>
+            <div className='softSkills'>
               <h2>Soft Skills</h2>
-              <form className="softskillsForm" id="softskillsForm">
+              <form className='softskillsForm' id='softskillsForm'>
                 <input
                   ref={skill1Ref}
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={value1Ref}
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   ref={skill2Ref}
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={value2Ref}
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   ref={skill3Ref}
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={value3Ref}
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   ref={skill4Ref}
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={value4Ref}
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   ref={skill5Ref}
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={value5Ref}
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   onClick={clicked}
-                  className="submit send"
-                  type="submit"
-                  value="Submit"
+                  className='submit send'
+                  type='submit'
+                  value='Submit'
                 />
               </form>
             </div>
-            <div className="techSkills">
+            <div className='techSkills'>
               <h2>Tech Skills</h2>
-              <form className="techskillsForm" id="techskillsForm">
+              <form className='techskillsForm' id='techskillsForm'>
                 <input
                   ref={techskill1Ref}
-                  id="techskill1"
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  id='techskill1'
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={techvalue1Ref}
-                  id="techvalue1"
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  id='techvalue1'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   ref={techskill2Ref}
-                  id="techskill2"
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  id='techskill2'
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={techvalue2Ref}
-                  id="techvalue2"
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  id='techvalue2'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   ref={techskill3Ref}
-                  id="techskill3"
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  id='techskill3'
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={techvalue3Ref}
-                  id="techvalue3"
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  id='techvalue3'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   ref={techskill4Ref}
-                  id="techskill4"
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  id='techskill4'
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={techvalue4Ref}
-                  id="techvalue4"
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  id='techvalue4'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   ref={techskill5Ref}
-                  id="techskill5"
-                  className="inp1"
-                  placeholder="Type Here your skill"
+                  id='techskill5'
+                  className='inp1'
+                  placeholder='Type Here your skill'
                 />
                 <input
                   ref={techvalue5Ref}
-                  id="techvalue5"
-                  className="inp2 range"
-                  type="range"
-                  min="1"
-                  max="5"
+                  id='techvalue5'
+                  className='inp2 range'
+                  type='range'
+                  min='1'
+                  max='5'
                 />
                 <input
                   onClick={sendTechSkills}
-                  className="submit send"
-                  type="submit"
-                  value="Submit"
+                  className='submit send'
+                  type='submit'
+                  value='Submit'
                 />
               </form>
             </div>
           </div>
         </div>
-        <div className="box3">
+        <div className='box3'>
           <i
             onClick={redirectToOpleiding}
-            className="fa-solid fa-arrow-right arrow-right"
+            className='fa-solid fa-arrow-right arrow-right'
           ></i>
           <p>Next</p>
         </div>

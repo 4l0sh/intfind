@@ -39,7 +39,7 @@ function verifyToken(req, res, next) {
     next();
   } catch (err) {
     console.log('error verifying token', err);
-    return res.status(401).json({ error: 'Unautorized: invalid token' });
+    return res.status(401).json({ error: 'Unautorized: invalid token ' });
   }
 }
 // Middleware to check if user is admin

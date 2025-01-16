@@ -29,7 +29,7 @@ const ToggleInputs = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('jwt')}`,
       },
       body: JSON.stringify({ userId, inputs }),
     })

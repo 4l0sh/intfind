@@ -48,6 +48,10 @@ const StudentCard = () => {
         return response.json();
       })
       .then((data) => {
+        if (!data || !data.user || !data.opleiding || !data.referenties) {
+          throw new Error('Incomplete data');
+        }
+
         setStudentName(data.user.username);
         setStudentPhoto(data.user.selectedAvatar);
         setEmail(data.user.email);
@@ -72,6 +76,12 @@ const StudentCard = () => {
       .catch((error) => {
         if (error.message === 'Unauthorized') {
           setErrorMessage('Unauthorized: no token. Please log in again');
+          return;
+        }
+        if (error.message === 'Incomplete data') {
+          setErrorMessage(
+            'Error: Incomplete user data. Please fill all required fields.'
+          );
           return;
         }
         setErrorMessage('Error getting user info. Check if you are logged in');
