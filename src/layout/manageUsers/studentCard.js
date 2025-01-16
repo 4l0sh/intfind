@@ -4,6 +4,7 @@ import M from 'materialize-css';
 const StudentCard = ({ user }) => {
   const { username, selectedAvatar, _id, role } = user;
   const [isEditing, setIsEditing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const editHandler = () => {
     setIsEditing(true);
@@ -49,7 +50,7 @@ const StudentCard = ({ user }) => {
     })
       .then((response) => {
         if (response.status === 401) {
-          M.toast({ html: 'Unauthorized You are no admin', classes: 'red' });
+          setErrorMessage('Unauthorized You are not an admin ');
         } else if (response.status === 200) {
           M.toast({ html: 'User Role updated successfully', classes: 'green' });
         }
@@ -79,8 +80,11 @@ const StudentCard = ({ user }) => {
         <div className='editCard'>
           <div className='editForm'>
             {' '}
+            {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
             <form className='editUserForm'>
-              <label htmlFor='role'>This user is a : {role}</label>
+              <label htmlFor='role'>
+                Change the user role from {role} to :
+              </label>
               <select className='select' name='role' id='role'>
                 <option value='' disabled>
                   Select Role
@@ -88,12 +92,22 @@ const StudentCard = ({ user }) => {
                 <option value='student'>Student</option>
                 <option value='admin'>Admin</option>
               </select>
-              <button type='submit' onClick={updateHandler}>
-                Update
-              </button>
-              <button type='button' onClick={closeHandler}>
-                Close
-              </button>
+              <div className='editBtns'>
+                <button
+                  className='editBtn'
+                  type='submit'
+                  onClick={updateHandler}
+                >
+                  Update
+                </button>
+                <button
+                  className='editBtn'
+                  type='button'
+                  onClick={closeHandler}
+                >
+                  Close
+                </button>
+              </div>
             </form>
           </div>
         </div>

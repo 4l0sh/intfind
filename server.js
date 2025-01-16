@@ -417,22 +417,6 @@ app.delete('/users/:id', checkAdminRole, (req, res) => {
     });
 });
 
-//test
-function testJwt(req, res, next) {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized: No token provided' });
-  }
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
-    }
-    if (decoded.role !== 'admin') {
-      return res.status(401).json({ message: 'Unauthorized: not an admin' });
-    }
-    next();
-  });
-}
 //update user
 app.put('/users/:id', checkAdminRole, (req, res) => {
   const collection = db.collection('users');
