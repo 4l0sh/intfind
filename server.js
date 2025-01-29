@@ -6,6 +6,7 @@ const port = 4000;
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const JWT_SECRET = 'intfind';
+const bcrypt = require('bcryptjs');
 
 //middleware
 app.use(cors());
@@ -66,12 +67,19 @@ function checkAdminRole(req, res, next) {
 //insert user
 app.post('/users/signup', (req, res) => {
   const collection = db.collection('users');
+  const hashedPassword = bcrypt.hashSync(req.body.password, 10);
   collection.findOne({ email: req.body.email }).then((existingUser) => {
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    const user = req.body;
+    const user = {
+      selectedAvatar: req.body.selectedAvatar,
+      username: req.body.username,
+      email: req.body.email,
+      password: hashedPassword,
+      role: req.body.role,
+    };
     collection
       .insertOne(user)
       .then((result) => {
@@ -252,37 +260,52 @@ app.post('/login', (req, res) => {
   const collection = db.collection('users');
 
   collection
-    .findOne({ email: req.body.email, password: req.body.password })
+    .findOne({ email: req.body.email })
     .then((result) => {
       if (!result) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
 
-      const token = jwt.sign(
-        {
+      // Compare the password asynchronously
+      bcrypt.compare(req.body.password, result.password, (err, isMatch) => {
+        if (err) {
+          console.error(err);
+          return res
+            .status(500)
+            .json({ message: 'Error while verifying password' });
+        }
+
+        if (!isMatch) {
+          return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // Only send the response after verifying the password
+        const token = jwt.sign(
+          {
+            userId: result._id,
+            username: result.username,
+            role: result.role,
+            iss: 'http://localhost:3000',
+          },
+          JWT_SECRET,
+          { expiresIn: '1h' }
+        );
+
+        const response = {
+          status: 200,
           userId: result._id,
           username: result.username,
           role: result.role,
-          iss: 'http://localhost:3000',
-        },
-        JWT_SECRET,
-        { expiresIn: '1h' }
-      );
+          message: `User ${result.username} has been logged in successfully`,
+          token: token,
+        };
 
-      const response = {
-        status: 200,
-        userId: result._id,
-        username: result.username,
-        role: result.role,
-        message: `User ${result.username} has been logged in successfully`,
-        token: token,
-      };
-
-      res.json(response);
+        return res.json(response); // Send the response here
+      });
     })
     .catch((err) => {
-      console.log('error logging in', err);
-      res.status(500).json({ message: 'Error logging in' });
+      console.error('Error logging in', err);
+      return res.status(500).json({ message: 'Error logging in' });
     });
 });
 
